@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    void Start()
+    public Transform itemParent;
+    public ItemClass itemPrefab;
+    private void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        itemPrefab.gameObject.SetActive(false);
     }
 }
