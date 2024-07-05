@@ -1,9 +1,7 @@
 *.vs
-*.sln
-*.csproj
-*.vsconfig
-*.cubemap
-Library
 UnityPackageManager
 Temp
+bin
 obj
+Library
+Logs
