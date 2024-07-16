@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf;
 using System.Net.Sockets;
-
+using Server;
 
 namespace Server.Net
 {
@@ -16,6 +16,15 @@ namespace Server.Net
             this.userId = userId;
             netPackage = new NetPackage();
             socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.headLength, SocketFlags.None, AsyncReceiveHead, netPackage);
+        }
+
+        public void SendMessage(IMessage netMsg)
+        {
+            SerializerUtil.Serializer(netMsg);
+        }
+        public void SendMessage(byte[] datas)
+        {
+            
         }
         private void AsyncReceiveHead(IAsyncResult ar)
         {
@@ -67,8 +76,8 @@ namespace Server.Net
                 }
                 else
                 {
-                    IMessage netMsg = SerializerUtil.DeSerializer<IMessage>(netPackage.bodyBuffer);
-                    OnReciveMsg(netMsg);
+                    //IMessage netMsg = SerializerUtil.DeSerializer<IMessage>(netPackage.bodyBuffer);
+                    //OnReciveMsg(netMsg);
                     netPackage.Reset();
                     socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.headLength, SocketFlags.None, AsyncReceiveHead, netPackage);
                 }
@@ -80,6 +89,8 @@ namespace Server.Net
                 CloseSession();
             }
         }
+        
+        
         private void OnReciveMsg(IMessage netMsg)
         {
 

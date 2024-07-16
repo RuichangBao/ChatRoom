@@ -9,6 +9,7 @@
         public int bodyLength = 0;
         public byte[] bodyBuffer = null;
         public int bodyIndex;
+
         public NetPackage()
         {
             headBuffer = new byte[headLength];
@@ -18,6 +19,12 @@
             Console.WriteLine();
             bodyLength = BitConverter.ToInt32(headBuffer, 0);
             bodyBuffer = new byte[bodyLength];
+        }
+        public int GetMsgType()
+        {
+            int msgType = BitConverter.ToInt32(headBuffer);
+            Console.WriteLine("msgType:" + msgType);
+            return msgType;
         }
         public void Reset()
         {
