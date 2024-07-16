@@ -1,0 +1,24 @@
+syntax = "proto3"; // 指定使用proto3语法
+import "MsgType.proto";
+package Proto;
+
+// 定义一个消息，名为TestRequest
+message TestRequest { 
+  Proto.MsgType msgType = 1;
+  string str = 2; // 查询字符串
+  int32 num1 = 3; // 页码
+  int32 num2 = 4; // 每页结果数
+}
+// 定义一个消息，名为TestResponses
+message TestResponses {
+  Proto.MsgType msgType = 1;
+  string str = 2; // 查询字符串
+  int32 num1 = 3; // 页码
+  int32 num2 = 4; // 每页结果数
+}
+
+//客户端链接成功
+message LinkSuccesResponse {
+  Proto.MsgType msgType = 1;
+  int64 userId = 2;
+}
