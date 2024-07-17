@@ -1,15 +1,19 @@
 ﻿using Google.Protobuf;
+using Proto;
+using System;
 using System.Net.Sockets;
-using Server;
 
 namespace Server.Net
 {
+    /// <summary>
+    /// 接入一个客户端，创建一个NetSession
+    /// </summary>
     public class NetSession
     {
         private NetPackage netPackage;
         private Socket socket;
-        private long userId;
-        public NetSession(Socket socket,long userId)
+        public long userId;
+        public NetSession(Socket socket, long userId)
         {
             Console.WriteLine("客户端链接成功");
             this.socket = socket;
@@ -18,13 +22,17 @@ namespace Server.Net
             socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.headLength, SocketFlags.None, AsyncReceiveHead, netPackage);
         }
 
-        public void SendMessage(IMessage netMsg)
+        public void SendMessage(MsgType msgType, IMessage message)
         {
-            SerializerUtil.Serializer(netMsg);
+            byte[] msgTypeData = BitConverter.GetBytes((int)msgType);
+            byte[] msgData = SerializerUtil.Serializer(message);
+            int msgLength = msgData.Length;
+            byte[]lengthData = BitConverter.GetBytes(msgLength);
+            NetMsg netMsg = new NetMsg(msgType, message);
         }
         public void SendMessage(byte[] datas)
         {
-            
+
         }
         private void AsyncReceiveHead(IAsyncResult ar)
         {
@@ -89,8 +97,8 @@ namespace Server.Net
                 CloseSession();
             }
         }
-        
-        
+
+
         private void OnReciveMsg(IMessage netMsg)
         {
 

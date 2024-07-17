@@ -24,19 +24,16 @@ namespace Proto {
     static ProtoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtQcm90by5wcm90bxIFUHJvdG8aDU1zZ1R5cGUucHJvdG8iVwoLVGVzdFJl",
-            "cXVlc3QSHwoHbXNnVHlwZRgBIAEoDjIOLlByb3RvLk1zZ1R5cGUSCwoDc3Ry",
-            "GAIgASgJEgwKBG51bTEYAyABKAUSDAoEbnVtMhgEIAEoBSJZCg1UZXN0UmVz",
-            "cG9uc2VzEh8KB21zZ1R5cGUYASABKA4yDi5Qcm90by5Nc2dUeXBlEgsKA3N0",
-            "chgCIAEoCRIMCgRudW0xGAMgASgFEgwKBG51bTIYBCABKAUiRQoSTGlua1N1",
-            "Y2Nlc1Jlc3BvbnNlEh8KB21zZ1R5cGUYASABKA4yDi5Qcm90by5Nc2dUeXBl",
-            "Eg4KBnVzZXJJZBgCIAEoA2IGcHJvdG8z"));
+            "CgtQcm90by5wcm90bxIFUHJvdG8iNgoLVGVzdFJlcXVlc3QSCwoDc3RyGAEg",
+            "ASgJEgwKBG51bTEYAiABKAUSDAoEbnVtMhgDIAEoBSI4Cg1UZXN0UmVzcG9u",
+            "c2VzEgsKA3N0chgBIAEoCRIMCgRudW0xGAIgASgFEgwKBG51bTIYAyABKAUi",
+            "JAoSTGlua1N1Y2Nlc1Jlc3BvbnNlEg4KBnVzZXJJZBgBIAEoA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Proto.MsgTypeReflection.Descriptor, },
+          new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestRequest), global::Proto.TestRequest.Parser, new[]{ "MsgType", "Str", "Num1", "Num2" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestResponses), global::Proto.TestResponses.Parser, new[]{ "MsgType", "Str", "Num1", "Num2" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LinkSuccesResponse), global::Proto.LinkSuccesResponse.Parser, new[]{ "MsgType", "UserId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestRequest), global::Proto.TestRequest.Parser, new[]{ "Str", "Num1", "Num2" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestResponses), global::Proto.TestResponses.Parser, new[]{ "Str", "Num1", "Num2" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LinkSuccesResponse), global::Proto.LinkSuccesResponse.Parser, new[]{ "UserId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -81,7 +78,6 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TestRequest(TestRequest other) : this() {
-      msgType_ = other.msgType_;
       str_ = other.str_;
       num1_ = other.num1_;
       num2_ = other.num2_;
@@ -94,20 +90,8 @@ namespace Proto {
       return new TestRequest(this);
     }
 
-    /// <summary>Field number for the "msgType" field.</summary>
-    public const int MsgTypeFieldNumber = 1;
-    private global::Proto.MsgType msgType_ = global::Proto.MsgType.EnTestRequest;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Proto.MsgType MsgType {
-      get { return msgType_; }
-      set {
-        msgType_ = value;
-      }
-    }
-
     /// <summary>Field number for the "str" field.</summary>
-    public const int StrFieldNumber = 2;
+    public const int StrFieldNumber = 1;
     private string str_ = "";
     /// <summary>
     /// 查询字符串
@@ -122,7 +106,7 @@ namespace Proto {
     }
 
     /// <summary>Field number for the "num1" field.</summary>
-    public const int Num1FieldNumber = 3;
+    public const int Num1FieldNumber = 2;
     private int num1_;
     /// <summary>
     /// 页码
@@ -137,7 +121,7 @@ namespace Proto {
     }
 
     /// <summary>Field number for the "num2" field.</summary>
-    public const int Num2FieldNumber = 4;
+    public const int Num2FieldNumber = 3;
     private int num2_;
     /// <summary>
     /// 每页结果数
@@ -166,7 +150,6 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (MsgType != other.MsgType) return false;
       if (Str != other.Str) return false;
       if (Num1 != other.Num1) return false;
       if (Num2 != other.Num2) return false;
@@ -177,7 +160,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (MsgType != global::Proto.MsgType.EnTestRequest) hash ^= MsgType.GetHashCode();
       if (Str.Length != 0) hash ^= Str.GetHashCode();
       if (Num1 != 0) hash ^= Num1.GetHashCode();
       if (Num2 != 0) hash ^= Num2.GetHashCode();
@@ -199,20 +181,16 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) MsgType);
-      }
       if (Str.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(Str);
       }
       if (Num1 != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(Num1);
       }
       if (Num2 != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(Num2);
       }
       if (_unknownFields != null) {
@@ -225,20 +203,16 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) MsgType);
-      }
       if (Str.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(Str);
       }
       if (Num1 != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(Num1);
       }
       if (Num2 != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(Num2);
       }
       if (_unknownFields != null) {
@@ -251,9 +225,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgType);
-      }
       if (Str.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Str);
       }
@@ -274,9 +245,6 @@ namespace Proto {
     public void MergeFrom(TestRequest other) {
       if (other == null) {
         return;
-      }
-      if (other.MsgType != global::Proto.MsgType.EnTestRequest) {
-        MsgType = other.MsgType;
       }
       if (other.Str.Length != 0) {
         Str = other.Str;
@@ -306,19 +274,15 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            MsgType = (global::Proto.MsgType) input.ReadEnum();
-            break;
-          }
-          case 18: {
+          case 10: {
             Str = input.ReadString();
             break;
           }
-          case 24: {
+          case 16: {
             Num1 = input.ReadInt32();
             break;
           }
-          case 32: {
+          case 24: {
             Num2 = input.ReadInt32();
             break;
           }
@@ -341,19 +305,15 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            MsgType = (global::Proto.MsgType) input.ReadEnum();
-            break;
-          }
-          case 18: {
+          case 10: {
             Str = input.ReadString();
             break;
           }
-          case 24: {
+          case 16: {
             Num1 = input.ReadInt32();
             break;
           }
-          case 32: {
+          case 24: {
             Num2 = input.ReadInt32();
             break;
           }
@@ -402,7 +362,6 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TestResponses(TestResponses other) : this() {
-      msgType_ = other.msgType_;
       str_ = other.str_;
       num1_ = other.num1_;
       num2_ = other.num2_;
@@ -415,20 +374,8 @@ namespace Proto {
       return new TestResponses(this);
     }
 
-    /// <summary>Field number for the "msgType" field.</summary>
-    public const int MsgTypeFieldNumber = 1;
-    private global::Proto.MsgType msgType_ = global::Proto.MsgType.EnTestRequest;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Proto.MsgType MsgType {
-      get { return msgType_; }
-      set {
-        msgType_ = value;
-      }
-    }
-
     /// <summary>Field number for the "str" field.</summary>
-    public const int StrFieldNumber = 2;
+    public const int StrFieldNumber = 1;
     private string str_ = "";
     /// <summary>
     /// 查询字符串
@@ -443,7 +390,7 @@ namespace Proto {
     }
 
     /// <summary>Field number for the "num1" field.</summary>
-    public const int Num1FieldNumber = 3;
+    public const int Num1FieldNumber = 2;
     private int num1_;
     /// <summary>
     /// 页码
@@ -458,7 +405,7 @@ namespace Proto {
     }
 
     /// <summary>Field number for the "num2" field.</summary>
-    public const int Num2FieldNumber = 4;
+    public const int Num2FieldNumber = 3;
     private int num2_;
     /// <summary>
     /// 每页结果数
@@ -487,7 +434,6 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (MsgType != other.MsgType) return false;
       if (Str != other.Str) return false;
       if (Num1 != other.Num1) return false;
       if (Num2 != other.Num2) return false;
@@ -498,7 +444,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (MsgType != global::Proto.MsgType.EnTestRequest) hash ^= MsgType.GetHashCode();
       if (Str.Length != 0) hash ^= Str.GetHashCode();
       if (Num1 != 0) hash ^= Num1.GetHashCode();
       if (Num2 != 0) hash ^= Num2.GetHashCode();
@@ -520,20 +465,16 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) MsgType);
-      }
       if (Str.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(Str);
       }
       if (Num1 != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(Num1);
       }
       if (Num2 != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(Num2);
       }
       if (_unknownFields != null) {
@@ -546,20 +487,16 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) MsgType);
-      }
       if (Str.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteString(Str);
       }
       if (Num1 != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(Num1);
       }
       if (Num2 != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(Num2);
       }
       if (_unknownFields != null) {
@@ -572,9 +509,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgType);
-      }
       if (Str.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Str);
       }
@@ -595,9 +529,6 @@ namespace Proto {
     public void MergeFrom(TestResponses other) {
       if (other == null) {
         return;
-      }
-      if (other.MsgType != global::Proto.MsgType.EnTestRequest) {
-        MsgType = other.MsgType;
       }
       if (other.Str.Length != 0) {
         Str = other.Str;
@@ -627,19 +558,15 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            MsgType = (global::Proto.MsgType) input.ReadEnum();
-            break;
-          }
-          case 18: {
+          case 10: {
             Str = input.ReadString();
             break;
           }
-          case 24: {
+          case 16: {
             Num1 = input.ReadInt32();
             break;
           }
-          case 32: {
+          case 24: {
             Num2 = input.ReadInt32();
             break;
           }
@@ -662,19 +589,15 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            MsgType = (global::Proto.MsgType) input.ReadEnum();
-            break;
-          }
-          case 18: {
+          case 10: {
             Str = input.ReadString();
             break;
           }
-          case 24: {
+          case 16: {
             Num1 = input.ReadInt32();
             break;
           }
-          case 32: {
+          case 24: {
             Num2 = input.ReadInt32();
             break;
           }
@@ -723,7 +646,6 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public LinkSuccesResponse(LinkSuccesResponse other) : this() {
-      msgType_ = other.msgType_;
       userId_ = other.userId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -734,20 +656,8 @@ namespace Proto {
       return new LinkSuccesResponse(this);
     }
 
-    /// <summary>Field number for the "msgType" field.</summary>
-    public const int MsgTypeFieldNumber = 1;
-    private global::Proto.MsgType msgType_ = global::Proto.MsgType.EnTestRequest;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Proto.MsgType MsgType {
-      get { return msgType_; }
-      set {
-        msgType_ = value;
-      }
-    }
-
     /// <summary>Field number for the "userId" field.</summary>
-    public const int UserIdFieldNumber = 2;
+    public const int UserIdFieldNumber = 1;
     private long userId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -773,7 +683,6 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (MsgType != other.MsgType) return false;
       if (UserId != other.UserId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -782,7 +691,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (MsgType != global::Proto.MsgType.EnTestRequest) hash ^= MsgType.GetHashCode();
       if (UserId != 0L) hash ^= UserId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -802,12 +710,8 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) MsgType);
-      }
       if (UserId != 0L) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(8);
         output.WriteInt64(UserId);
       }
       if (_unknownFields != null) {
@@ -820,12 +724,8 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) MsgType);
-      }
       if (UserId != 0L) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(8);
         output.WriteInt64(UserId);
       }
       if (_unknownFields != null) {
@@ -838,9 +738,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (MsgType != global::Proto.MsgType.EnTestRequest) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgType);
-      }
       if (UserId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
@@ -855,9 +752,6 @@ namespace Proto {
     public void MergeFrom(LinkSuccesResponse other) {
       if (other == null) {
         return;
-      }
-      if (other.MsgType != global::Proto.MsgType.EnTestRequest) {
-        MsgType = other.MsgType;
       }
       if (other.UserId != 0L) {
         UserId = other.UserId;
@@ -882,10 +776,6 @@ namespace Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            MsgType = (global::Proto.MsgType) input.ReadEnum();
-            break;
-          }
-          case 16: {
             UserId = input.ReadInt64();
             break;
           }
@@ -909,10 +799,6 @@ namespace Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            MsgType = (global::Proto.MsgType) input.ReadEnum();
-            break;
-          }
-          case 16: {
             UserId = input.ReadInt64();
             break;
           }

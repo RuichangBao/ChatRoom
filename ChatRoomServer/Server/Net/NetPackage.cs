@@ -20,12 +20,7 @@
             bodyLength = BitConverter.ToInt32(headBuffer, 0);
             bodyBuffer = new byte[bodyLength];
         }
-        public int GetMsgType()
-        {
-            int msgType = BitConverter.ToInt32(headBuffer);
-            Console.WriteLine("msgType:" + msgType);
-            return msgType;
-        }
+
         public void Reset()
         {
             headIndex = 0;

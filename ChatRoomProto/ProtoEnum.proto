@@ -1,0 +1,14 @@
+syntax = "proto3"; // 指定使用proto3语法
+package Proto;//导出cs的命名空间
+
+//ProtoEnum.proto 导出cs的文件名
+
+enum MsgType{
+  enTestRequest = 0;
+  enTestResponses = 1;
+  enLinkSuccesResponse = 100;//客户端链接成功
+}
+enum ErrorCode//错误码
+{
+  ErrorNone = 0;
+}

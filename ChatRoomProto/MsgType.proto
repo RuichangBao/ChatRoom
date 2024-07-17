@@ -1,7 +1,0 @@
-syntax = "proto3"; // 指定使用proto3语法
-package Proto;
-
-enum MsgType{
-  enTestRequest = 0;
-  enTestResponses = 1;
-}

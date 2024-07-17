@@ -1,9 +1,10 @@
-﻿using System.Net;
+﻿using Proto;
+using System.Net;
 using System.Net.Sockets;
 
 namespace Server.Net
 {
-    public class ServerNet : Singleton<ServerNet>
+    public class NetServer : Singleton<NetServer>
     {
         private List<NetSession> listNetSession = new List<NetSession>();
         private string ip = "127.0.0.1";
@@ -35,6 +36,16 @@ namespace Server.Net
             userId++;
             NetSession netSession = new NetSession(clientSocket, userId);
             socket.BeginAccept(AcceptCallBack, socket);
+
+            LinkSuccesResponse(netSession);//向客户端发送链接成功协议
+        }
+        private void LinkSuccesResponse(NetSession netSession)
+        {
+            LinkSuccesResponse response = new LinkSuccesResponse
+            {
+                UserId = netSession.userId
+            };
+            netSession.SendMessage(MsgType.EnLinkSuccesResponse, response);
         }
     }
 }

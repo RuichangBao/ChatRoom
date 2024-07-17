@@ -6,7 +6,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            ServerNet.Instance.StartServer();
+            NetServer.Instance.StartServer();
             Console.WriteLine("服务器启动成功!");
             while (true) { }
         }
