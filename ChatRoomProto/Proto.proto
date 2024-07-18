@@ -3,9 +3,8 @@ package Proto;    //导出cs的命名空间
 
 // 定义一个消息，名为TestRequest
 message TestRequest { 
-  string str = 1; // 查询字符串
-  int32 num1 = 2; // 页码
-  int32 num2 = 3; // 每页结果数
+  int32 num1 = 1; // 页码
+  int32 num2 = 2; // 每页结果数
 }
 // 定义一个消息，名为TestResponses
 message TestResponses {

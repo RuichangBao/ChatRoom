@@ -2,7 +2,7 @@
 using Proto;
 using System;
 
-namespace Server.Net
+namespace Net
 {
     public struct NetMsg
     {

@@ -24,14 +24,14 @@ namespace Proto {
     static ProtoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtQcm90by5wcm90bxIFUHJvdG8iNgoLVGVzdFJlcXVlc3QSCwoDc3RyGAEg",
-            "ASgJEgwKBG51bTEYAiABKAUSDAoEbnVtMhgDIAEoBSI4Cg1UZXN0UmVzcG9u",
-            "c2VzEgsKA3N0chgBIAEoCRIMCgRudW0xGAIgASgFEgwKBG51bTIYAyABKAUi",
-            "JAoSTGlua1N1Y2Nlc1Jlc3BvbnNlEg4KBnVzZXJJZBgBIAEoA2IGcHJvdG8z"));
+            "CgtQcm90by5wcm90bxIFUHJvdG8iKQoLVGVzdFJlcXVlc3QSDAoEbnVtMRgB",
+            "IAEoBRIMCgRudW0yGAIgASgFIjgKDVRlc3RSZXNwb25zZXMSCwoDc3RyGAEg",
+            "ASgJEgwKBG51bTEYAiABKAUSDAoEbnVtMhgDIAEoBSIkChJMaW5rU3VjY2Vz",
+            "UmVzcG9uc2USDgoGdXNlcklkGAEgASgDYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestRequest), global::Proto.TestRequest.Parser, new[]{ "Str", "Num1", "Num2" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestRequest), global::Proto.TestRequest.Parser, new[]{ "Num1", "Num2" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TestResponses), global::Proto.TestResponses.Parser, new[]{ "Str", "Num1", "Num2" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LinkSuccesResponse), global::Proto.LinkSuccesResponse.Parser, new[]{ "UserId" }, null, null, null, null)
           }));
@@ -78,7 +78,6 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public TestRequest(TestRequest other) : this() {
-      str_ = other.str_;
       num1_ = other.num1_;
       num2_ = other.num2_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -90,23 +89,8 @@ namespace Proto {
       return new TestRequest(this);
     }
 
-    /// <summary>Field number for the "str" field.</summary>
-    public const int StrFieldNumber = 1;
-    private string str_ = "";
-    /// <summary>
-    /// 查询字符串
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Str {
-      get { return str_; }
-      set {
-        str_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "num1" field.</summary>
-    public const int Num1FieldNumber = 2;
+    public const int Num1FieldNumber = 1;
     private int num1_;
     /// <summary>
     /// 页码
@@ -121,7 +105,7 @@ namespace Proto {
     }
 
     /// <summary>Field number for the "num2" field.</summary>
-    public const int Num2FieldNumber = 3;
+    public const int Num2FieldNumber = 2;
     private int num2_;
     /// <summary>
     /// 每页结果数
@@ -150,7 +134,6 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Str != other.Str) return false;
       if (Num1 != other.Num1) return false;
       if (Num2 != other.Num2) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -160,7 +143,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Str.Length != 0) hash ^= Str.GetHashCode();
       if (Num1 != 0) hash ^= Num1.GetHashCode();
       if (Num2 != 0) hash ^= Num2.GetHashCode();
       if (_unknownFields != null) {
@@ -181,16 +163,12 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Str.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Str);
-      }
       if (Num1 != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(8);
         output.WriteInt32(Num1);
       }
       if (Num2 != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(Num2);
       }
       if (_unknownFields != null) {
@@ -203,16 +181,12 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Str.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Str);
-      }
       if (Num1 != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(8);
         output.WriteInt32(Num1);
       }
       if (Num2 != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(16);
         output.WriteInt32(Num2);
       }
       if (_unknownFields != null) {
@@ -225,9 +199,6 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Str.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Str);
-      }
       if (Num1 != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Num1);
       }
@@ -245,9 +216,6 @@ namespace Proto {
     public void MergeFrom(TestRequest other) {
       if (other == null) {
         return;
-      }
-      if (other.Str.Length != 0) {
-        Str = other.Str;
       }
       if (other.Num1 != 0) {
         Num1 = other.Num1;
@@ -274,15 +242,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Str = input.ReadString();
-            break;
-          }
-          case 16: {
+          case 8: {
             Num1 = input.ReadInt32();
             break;
           }
-          case 24: {
+          case 16: {
             Num2 = input.ReadInt32();
             break;
           }
@@ -305,15 +269,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            Str = input.ReadString();
-            break;
-          }
-          case 16: {
+          case 8: {
             Num1 = input.ReadInt32();
             break;
           }
-          case 24: {
+          case 16: {
             Num2 = input.ReadInt32();
             break;
           }

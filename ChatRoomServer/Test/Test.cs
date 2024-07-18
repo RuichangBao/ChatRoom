@@ -1,7 +1,9 @@
-﻿using Proto;
+﻿using Google.Protobuf;
+using Proto;
 using Server;
 using Server.Net;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Test
 {
@@ -11,13 +13,12 @@ namespace Test
         {
             TestRequest request = new TestRequest
             {
-                Num1 = 1,
-                Num2 = 2,
-                Str = "dsa",
+                Num1 = 10000,
+                //Num2 = 2,
             };
 
-            byte[] datas = BitConverter.GetBytes(100);
-            Console.WriteLine(BitConverter.ToInt32(datas));
+            byte[] datas = MessageExtensions.ToByteArray(request);
+            Console.WriteLine(datas.Length);
             Console.WriteLine("Hello, World!");
         }
     }
