@@ -11,7 +11,6 @@ namespace Net
         private Socket socket;
         private int port = 1994;
         private string ip = "127.0.0.1";
-        private NetPackage netPackage;
         private const int maxBufferLength = 2048;
         private byte[] receiveBuffer = new byte[maxBufferLength];
 
@@ -21,7 +20,6 @@ namespace Net
             IPAddress iPAddress = IPAddress.Parse(ip);
             IPEndPoint iPEndPoint = new IPEndPoint(iPAddress, port);
             socket.BeginConnect(iPEndPoint, ConnectCallBack, socket);
-            Debug.LogError("链接成功");
         }
 
         private void ConnectCallBack(IAsyncResult ar)
@@ -32,6 +30,7 @@ namespace Net
                 Debug.LogError("链接服务器失败，请重新链接");
                 return;
             }
+            Debug.LogError("链接成功");
             socket.BeginReceive(receiveBuffer, 0, maxBufferLength, SocketFlags.None, AsyncReceive, socket);
         }
 
@@ -40,24 +39,12 @@ namespace Net
         {
             try
             {
-                NetPackage netPackage = ar.AsyncState as NetPackage;
                 int length = socket.EndReceive(ar);//本次接收的字节数
                 if (length <= 0)
                 {
                     Console.WriteLine("已经下线");
                     return;
                 }
-                netPackage.headIndex += length;
-                if (netPackage.headIndex < NetPackage.headLength)
-                {
-                    socket.BeginReceive(netPackage.headBuffer, netPackage.headIndex, NetPackage.headLength - netPackage.headIndex, SocketFlags.None, AsyncReceiveHead, netPackage);
-                }
-                else
-                {
-                    netPackage.InitBodyBuff();
-                    socket.BeginReceive(netPackage.bodyBuffer, 0, netPackage.bodyLength, SocketFlags.None, AsyncReceiveBody, netPackage);
-                }
-
             }
             catch (Exception ex)
             {

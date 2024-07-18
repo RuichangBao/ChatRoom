@@ -62,7 +62,6 @@
     <Compile Include="Assets\Scripts\Interface\Singleton.cs" />
     <Compile Include="Assets\Scripts\Proto\Proto.cs" />
     <Compile Include="Assets\Scripts\Net\NetSession.cs" />
-    <Compile Include="Assets\Scripts\Net\NetPackage.cs" />
     <Compile Include="Assets\Scripts\Net\NetMsg.cs" />
     <Compile Include="Assets\Scripts\SerializerUtil.cs" />
   </ItemGroup>
