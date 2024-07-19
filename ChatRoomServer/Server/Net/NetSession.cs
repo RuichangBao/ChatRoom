@@ -1,6 +1,5 @@
 ﻿using Google.Protobuf;
 using Proto;
-using System;
 using System.Net.Sockets;
 
 namespace Server.Net
@@ -12,33 +11,44 @@ namespace Server.Net
     {
         private NetPackage netPackage;
         private Socket socket;
-        public long userId;
-        public NetSession(Socket socket, long userId)
+        public int userId;
+        private NetworkStream networkStream;
+        public NetSession(Socket socket, int userId)
         {
             Console.WriteLine("客户端链接成功");
             this.socket = socket;
             this.userId = userId;
             netPackage = new NetPackage();
-            socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.headLength, SocketFlags.None, AsyncReceiveHead, netPackage);
+            networkStream = new NetworkStream(socket);
+            socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, netPackage);
         }
 
         public void SendMessage(MsgType msgType, IMessage message)
         {
+            byte[] messageData = message.ToByteArray();
+            int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
+            byte[] bodyLengthData = BitConverter.GetBytes(bodyLength);
             byte[] msgTypeData = BitConverter.GetBytes((int)msgType);
-            byte[] msgData = SerializerUtil.Serializer(message);
-            int msgLength = msgData.Length;
-            byte[]lengthData = BitConverter.GetBytes(msgLength);
-            NetMsg netMsg = new NetMsg(msgType, message);
+            int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
+            byte[] sendBuffer = new byte[length];
+            bodyLengthData.CopyTo(sendBuffer, 0);
+            msgTypeData.CopyTo(sendBuffer, NetPackage.HeadLength);
+            messageData.CopyTo(sendBuffer, NetPackage.HeadLength + NetPackage.MsgTypeLength);
+            SendMessage(sendBuffer);
         }
-        public void SendMessage(byte[] datas)
+        private void SendMessage(byte[] data)
         {
-
+            networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
         }
+
+        private void SendCallBack(IAsyncResult ar)
+        {
+        }
+
         private void AsyncReceiveHead(IAsyncResult ar)
         {
             try
             {
-                NetPackage netPackage = ar.AsyncState as NetPackage;
                 int length = socket.EndReceive(ar);//本次接收的字节数
                 if (length <= 0)
                 {
@@ -47,16 +57,15 @@ namespace Server.Net
                     return;
                 }
                 netPackage.headIndex += length;
-                if (netPackage.headIndex < NetPackage.headLength)
+                if (netPackage.headIndex < NetPackage.HeadLength)
                 {
-                    socket.BeginReceive(netPackage.headBuffer, netPackage.headIndex, NetPackage.headLength - netPackage.headIndex, SocketFlags.None, AsyncReceiveHead, netPackage);
+                    socket.BeginReceive(netPackage.headBuffer, netPackage.headIndex, NetPackage.HeadLength - netPackage.headIndex, SocketFlags.None, AsyncReceiveHead, socket);
                 }
                 else
                 {
                     netPackage.InitBodyBuff();
-                    socket.BeginReceive(netPackage.bodyBuffer, 0, netPackage.bodyLength, SocketFlags.None, AsyncReceiveBody, netPackage);
+                    socket.BeginReceive(netPackage.bodyBuffer, 0, netPackage.bodyLength, SocketFlags.None, AsyncReceiveBody, socket);
                 }
-
             }
             catch (Exception ex)
             {
@@ -69,7 +78,6 @@ namespace Server.Net
         {
             try
             {
-                NetPackage netPackage = ar.AsyncState as NetPackage;
                 int length = socket.EndReceive(ar);//本次接收的字节数
                 if (length <= 0)
                 {
@@ -80,16 +88,13 @@ namespace Server.Net
                 netPackage.bodyIndex += length;
                 if (netPackage.bodyIndex < netPackage.bodyLength)
                 {
-                    socket.BeginReceive(netPackage.bodyBuffer, netPackage.bodyIndex, netPackage.bodyLength - netPackage.bodyIndex, SocketFlags.None, AsyncReceiveBody, netPackage);
+                    socket.BeginReceive(netPackage.bodyBuffer, netPackage.bodyIndex, netPackage.bodyLength - netPackage.bodyIndex, SocketFlags.None, AsyncReceiveBody, socket);
                 }
                 else
                 {
-                    //IMessage netMsg = SerializerUtil.DeSerializer<IMessage>(netPackage.bodyBuffer);
-                    //OnReciveMsg(netMsg);
-                    netPackage.Reset();
-                    socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.headLength, SocketFlags.None, AsyncReceiveHead, netPackage);
+                    AnalyseMessage();
+                    socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, socket);
                 }
-
             }
             catch (Exception ex)
             {
@@ -97,11 +102,21 @@ namespace Server.Net
                 CloseSession();
             }
         }
-
-
-        private void OnReciveMsg(IMessage netMsg)
+        //解析协议
+        private void AnalyseMessage()
         {
-
+            int msgType = netPackage.GetMsgType();
+            if (!NetServer.Instance.messageEventHandle.TryGetValue(msgType, out NetEventHandle netEventHandle))
+            {
+                Console.WriteLine("协议未注册：" + msgType);
+            }
+            else
+            {
+                IMessage message = netPackage.GetMessage(netEventHandle.parser);
+                Console.WriteLine("收到客户端协议：" + message);
+                netEventHandle.callBack(this, message);
+            }
+            netPackage.Reset();
         }
         private void CloseSession()
         {

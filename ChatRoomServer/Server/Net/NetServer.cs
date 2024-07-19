@@ -1,4 +1,5 @@
-﻿using Proto;
+﻿using Google.Protobuf;
+using Proto;
 using System.Net;
 using System.Net.Sockets;
 
@@ -6,11 +7,15 @@ namespace Server.Net
 {
     public class NetServer : Singleton<NetServer>
     {
-        private List<NetSession> listNetSession = new List<NetSession>();
+        private Dictionary<int, NetSession> listNetSession = new Dictionary<int, NetSession>();
         private string ip = "127.0.0.1";
         private int port = 1994;
         private Socket socket;
-        private long userId = 0;
+        private int userId = 0;
+        public Dictionary<int, NetEventHandle> messageEventHandle = new Dictionary<int, NetEventHandle>();
+        
+        
+        #region 开启服务器，接收客户端链接
         public void StartServer()
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -27,25 +32,35 @@ namespace Server.Net
             {
                 Console.WriteLine(ex.ToString());
             }
-
         }
+
         ///<summary>开始接收客户端链接</summary>
         private void AcceptCallBack(IAsyncResult ar)
         {
             Socket clientSocket = socket.EndAccept(ar);
             userId++;
             NetSession netSession = new NetSession(clientSocket, userId);
-            socket.BeginAccept(AcceptCallBack, socket);
-
+            listNetSession.Add(userId, netSession);
+            socket.BeginAccept(AcceptCallBack, socket);//监听下个接入的客户端
             LinkSuccesResponse(netSession);//向客户端发送链接成功协议
         }
+        #endregion
+
+
+        internal void Listen(MsgType msgType, MessageParser parser, Action<NetSession,IMessage> callback)
+        {
+            NetEventHandle netEventHandle = new NetEventHandle(parser, callback);
+            messageEventHandle[(int)msgType] = netEventHandle;
+        }
+
         private void LinkSuccesResponse(NetSession netSession)
         {
-            LinkSuccesResponse response = new LinkSuccesResponse
+            ResponseLinkSucces response = new ResponseLinkSucces
             {
                 UserId = netSession.userId
             };
-            netSession.SendMessage(MsgType.EnLinkSuccesResponse, response);
+            netSession.SendMessage(MsgType.EnResponseLinkSucces, response);
         }
+
     }
 }

@@ -11,15 +11,15 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            TestRequest request = new TestRequest
+            int num = 1;
+            byte[] data = BitConverter.GetBytes(num);
+            for (int i = 0; i < data.Length; i++)
             {
-                Num1 = 10000,
-                //Num2 = 2,
-            };
-
-            byte[] datas = MessageExtensions.ToByteArray(request);
-            Console.WriteLine(datas.Length);
-            Console.WriteLine("Hello, World!");
+                Console.WriteLine(data[i]);
+            }
+            int aaa = BitConverter.ToInt32(data);
+            Console.WriteLine(  aaa);
+            Console.ReadKey();
         }
     }
 }

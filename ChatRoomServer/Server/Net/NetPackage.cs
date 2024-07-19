@@ -1,8 +1,11 @@
-﻿namespace Server.Net
+﻿using Google.Protobuf;
+
+namespace Server.Net
 {
     public class NetPackage
     {
-        public const int headLength = 4;
+        public const int MsgTypeLength = 4;//协议号长度
+        public const int HeadLength = 4;
         public byte[] headBuffer = null;
         public int headIndex;
 
@@ -12,7 +15,7 @@
 
         public NetPackage()
         {
-            headBuffer = new byte[headLength];
+            headBuffer = new byte[HeadLength];
         }
         public void InitBodyBuff()
         {
@@ -20,13 +23,20 @@
             bodyLength = BitConverter.ToInt32(headBuffer, 0);
             bodyBuffer = new byte[bodyLength];
         }
-
+        public int GetMsgType()
+        {
+            int msgType = BitConverter.ToInt32(bodyBuffer, 0);
+            return msgType;
+        }
+        public IMessage GetMessage(MessageParser parser)
+        {
+            IMessage message = parser.ParseFrom(bodyBuffer, MsgTypeLength, bodyLength - MsgTypeLength);
+            return message;
+        }
         public void Reset()
         {
+            //必要清除
             headIndex = 0;
-            Array.Clear(headBuffer);
-            bodyLength = 0;
-            bodyBuffer = null;
             bodyIndex = 0;
         }
     }

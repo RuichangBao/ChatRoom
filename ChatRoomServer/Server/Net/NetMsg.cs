@@ -1,6 +1,5 @@
 ﻿using Google.Protobuf;
 using Proto;
-using System;
 
 namespace Server.Net
 {
@@ -18,8 +17,8 @@ namespace Server.Net
             byte[] lengthData = BitConverter.GetBytes(messageLength);
             byte[] msgTypeData = BitConverter.GetBytes((int)msgType);
             data = new byte[lengthMsgType + lengthCount + messageData.Length];
-            msgTypeData.CopyTo(data, 0);
-            lengthData.CopyTo(data, lengthCount);
+            lengthData.CopyTo(data, 0);
+            msgTypeData.CopyTo(data, lengthCount);
             messageData.CopyTo(data, lengthCount + lengthMsgType);
 
             Console.WriteLine("构造完成");

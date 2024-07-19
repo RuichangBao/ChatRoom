@@ -4,11 +4,18 @@ package Proto;//导出cs的命名空间
 //ProtoEnum.proto 导出cs的文件名
 
 enum MsgType{
-  enTestRequest = 0;
-  enTestResponses = 1;
-  enLinkSuccesResponse = 100;//客户端链接成功
+  enRequestTest = 0;
+  enResponsesTest = 1;
+  enResponseLinkSucces = 100; //客户端链接成功
+  enRequestCreateRoom = 101;  //创建房间
+  enResponseCreateRoom = 102;
+  enRequestJoinRoom = 103;  //加入房间
+  enResponseJoinRoom = 104;
+  enRequestLeaveRoom = 105;//退出房间
+  enResponseLeaveRoom = 106;
 }
 enum ErrorCode//错误码
 {
-  ErrorNone = 0;
+  ErrTest = 0;
+  ErrRoomNone = 100;//房间不存在
 }

@@ -2,18 +2,40 @@ syntax = "proto3";// 指定使用proto3语法
 package Proto;    //导出cs的命名空间
 
 // 定义一个消息，名为TestRequest
-message TestRequest { 
+message RequestTest { 
   int32 num1 = 1; // 页码
   int32 num2 = 2; // 每页结果数
+  string str = 3;
 }
 // 定义一个消息，名为TestResponses
-message TestResponses {
+message ResponsesTest {
   string str = 1; // 查询字符串
   int32 num1 = 2; // 页码
   int32 num2 = 3; // 每页结果数
 }
 
 //客户端链接成功
-message LinkSuccesResponse {
-  int64 userId = 1;
+message ResponseLinkSucces {
+  int32 userId = 1;
+}
+
+//创建房间
+message RequestCreateRoom{
+
+}
+message ResponseCreateRoom{
+  int32 roomId = 1;
+}
+
+//加入房间
+message RequestJoinRoom{
+  int32 roomId = 1;
+}
+message ResponseJoinRoom{
+}
+
+//退出房间
+message RequestLeaveRoom{
+}
+message ResponseLeaveRoom{
 }
