@@ -1,7 +1,7 @@
 @echo off
 set outPut=csharpOutPut
-set clientOutPut=..\ChatRoomClient\Assets\Scripts\Proto
-set serverOutPut=..\ChatRoomServer\Server\Proto
+set clientOutPut=..\TcpClient\Assets\Scripts\Proto
+set serverOutPut=..\TcpServer\Server\Proto
 
 echo remove file in csharpOutPut
 if exist %outPut% (

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{9D1611AD-4AB7-D26E-967E-7973C4643F3C}</ProjectGuid>
+    <ProjectGuid>{23ACE8B5-3FAA-E9CE-AFD0-0C4AEEAF7ECC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -59,13 +59,13 @@
     <Compile Include="Assets\Scripts\Init.cs" />
     <Compile Include="Assets\Scripts\Proto\ProtoEnum.cs" />
     <Compile Include="Assets\Scripts\Net\NetMsg.cs" />
-    <Compile Include="Assets\Scripts\Net\NetClient.cs" />
-    <Compile Include="Assets\Scripts\Interface\Singleton.cs" />
-    <Compile Include="Assets\Scripts\Proto\Proto.cs" />
-    <Compile Include="Assets\Scripts\Net\NetPackage.cs" />
     <Compile Include="Assets\Scripts\Net\NetEventHandle.cs" />
-    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Net\NetPackage.cs" />
+    <Compile Include="Assets\Scripts\Net\NetClient.cs" />
     <Compile Include="Assets\Scripts\NetBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Interface\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Proto\Proto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\libs\System.Buffers.dll" />
