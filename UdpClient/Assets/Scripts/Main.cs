@@ -1,8 +1,6 @@
 using Google.Protobuf;
 using Net;
 using Proto;
-using System;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +25,15 @@ public class Main : MonoBehaviour
 
     public void BtnCreateRoom()
     {
-        RequestCreateRoom request = new RequestCreateRoom();
-        NetClient.Instance.SendMessage(MsgType.EnRequestCreateRoom, request);
+        RequestTest request = new RequestTest();
+        for (int i = 0; i < 100; i++)
+        {
+            request.Num1 = request.Num2 = i;
+            request.Str = $"{i}{i}{i}";
+            byte[] data = request.ToByteArray();
+            Debug.LogError(i + ":" + data.Length);
+            NetClient.Instance.SendMessage(data);
+        }
+
     }
 }

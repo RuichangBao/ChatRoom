@@ -2,20 +2,23 @@ syntax = "proto3";// 指定使用proto3语法
 package Proto;    //导出cs的命名空间
 
 // 定义一个消息，名为TestRequest
-message RequestTest { 
+message RequestTest{ 
   int32 num1 = 1; // 页码
   int32 num2 = 2; // 每页结果数
   string str = 3;
 }
 // 定义一个消息，名为TestResponses
-message ResponsesTest {
+message ResponsesTest{
   string str = 1; // 查询字符串
   int32 num1 = 2; // 页码
   int32 num2 = 3; // 每页结果数
 }
+//客户端请求连接
+message RequestLink{
 
+}
 //客户端链接成功
-message ResponseLinkSucces {
+message ResponseLink{
   int32 userId = 1;
 }
 

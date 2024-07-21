@@ -13,12 +13,13 @@ namespace Net
     public class NetClient : Singleton<NetClient>
     {
         private Socket socket;
-
+        private EndPoint serverEndPoint;
         private NetPackage netPackage;
         private Dictionary<int, NetEventHandle> messageEventHandle = new Dictionary<int, NetEventHandle>();
         private Queue<NetMsg> recevieMessage = new Queue<NetMsg>();
-        private NetworkStream networkStream;
-
+        private int sendMsgId = 0;//向服务器发送消息的编号
+        private Queue<NetSendData> netSendDatas = new Queue<NetSendData>();
+        private const int SENDDATATIMER = 5000;//已经发送消息维护时间
         public void StartClient()
         {
             int port = 1995;
@@ -27,28 +28,7 @@ namespace Net
             IPAddress iPAddress = IPAddress.Parse(ip);
             IPEndPoint iPEndPoint = new IPEndPoint(iPAddress, port);
             socket.Bind(iPEndPoint);
-            EndPoint serverEndPoint = new IPEndPoint(iPAddress, 1994);
-            for (int i = 0; i < 100; i++)
-            {
-                byte[] buffer = Encoding.UTF8.GetBytes("我是客户端" + i);
-                socket.SendTo(buffer, serverEndPoint);
-            }
-
-
-        }
-
-        private void ConnectCallBack(IAsyncResult ar)
-        {
-            Debug.Log("异步链接到服务器" + socket.Connected);
-            if (!socket.Connected)
-            {
-                Debug.LogError("链接服务器失败，请重新链接");
-                return;
-            }
-            Debug.LogError("链接成功");
-            networkStream = new NetworkStream(socket);
-            netPackage = new NetPackage();
-            socket.BeginReceive(netPackage.headBuffer, netPackage.headIndex, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, socket);
+            serverEndPoint = new IPEndPoint(iPAddress, 1994);
         }
 
 
@@ -122,18 +102,21 @@ namespace Net
         {
             byte[] messageData = message.ToByteArray();
             int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
-            byte[] bodyLengthData = BitConverter.GetBytes(bodyLength);
             byte[] msgTypeData = BitConverter.GetBytes((int)msgType);
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
             byte[] sendBuffer = new byte[length];
-            bodyLengthData.CopyTo(sendBuffer, 0);
             msgTypeData.CopyTo(sendBuffer, NetPackage.HeadLength);
             messageData.CopyTo(sendBuffer, NetPackage.HeadLength + NetPackage.MsgTypeLength);
             SendMessage(sendBuffer);
         }
-        private void SendMessage(byte[] data)
+        public void SendMessage(byte[] data)
         {
-            networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
+            //把消息号加入到消息中去
+            sendMsgId++;
+            byte[] sendMsgIdData = BitConverter.GetBytes(sendMsgId);
+            sendMsgIdData.CopyTo(data, 0);
+            netSendDatas.Enqueue(new NetSendData(data));
+            socket.BeginSendTo(data, 0, data.Length, SocketFlags.None, serverEndPoint, SendCallBack, socket);
         }
         private void SendCallBack(IAsyncResult ar)
         {
@@ -146,6 +129,23 @@ namespace Net
                 NetMsg netMsg = recevieMessage.Dequeue();
                 netMsg.callBack?.Invoke(netMsg.message);
             }
+            ClearSendDatas();
         }
+
+        ///<summary>维护已经发送的消息</summary>
+        private void ClearSendDatas()
+        {
+            long timer = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            while (netSendDatas.Count > 0)
+            {
+                NetSendData netSendData = netSendDatas.Peek();
+                long passTimer = timer - netSendData.timer;
+                if (passTimer <= SENDDATATIMER)
+                    return;
+                netSendDatas.Dequeue();
+                netSendData = netSendDatas.Peek();
+            }
+        }
+
     }
 }

@@ -7,21 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class Init : MonoBehaviour
 {
+    private void Awake()
+    {
+         NetClient.Instance.StartClient();
+    }
     void Start()
     {
-        NetClient.Instance.Listen(MsgType.EnResponseLinkSucces, ResponseLinkSucces.Parser, _ResponseLinkSucces);
-        NetClient.Instance.StartClient();
-    }
-
-    private void _ResponseLinkSucces(IMessage message)
-    {
-        ResponseLinkSucces response = message as ResponseLinkSucces;
-        if (response == null)
-        {
-            Debug.LogError("消息转化错误");
-            return;
-        }
-        Debug.LogError(message.ToString());
+        RequestLink request =new RequestLink();
+        NetClient.Instance.SendMessage(MsgType.EnRequestLink, request);
         SceneManager.LoadScene("Main");
     }
 }

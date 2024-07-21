@@ -6,7 +6,8 @@ package Proto;//导出cs的命名空间
 enum MsgType{
   enRequestTest = 0;
   enResponsesTest = 1;
-  enResponseLinkSucces = 100; //客户端链接成功
+  enRequestLink = 99;   //客户端请求连接
+  enResponseLink = 100; //客户端链接成功
   enRequestCreateRoom = 101;  //创建房间
   enResponseCreateRoom = 102;
   enRequestJoinRoom = 103;  //加入房间

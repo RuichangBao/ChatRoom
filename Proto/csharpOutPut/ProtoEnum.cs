@@ -24,13 +24,13 @@ namespace Proto {
     static ProtoEnumReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg9Qcm90b0VudW0ucHJvdG8SBVByb3RvKt4BCgdNc2dUeXBlEhEKDWVuUmVx",
-            "dWVzdFRlc3QQABITCg9lblJlc3BvbnNlc1Rlc3QQARIYChRlblJlc3BvbnNl",
-            "TGlua1N1Y2NlcxBkEhcKE2VuUmVxdWVzdENyZWF0ZVJvb20QZRIYChRlblJl",
-            "c3BvbnNlQ3JlYXRlUm9vbRBmEhUKEWVuUmVxdWVzdEpvaW5Sb29tEGcSFgoS",
-            "ZW5SZXNwb25zZUpvaW5Sb29tEGgSFgoSZW5SZXF1ZXN0TGVhdmVSb29tEGkS",
-            "FwoTZW5SZXNwb25zZUxlYXZlUm9vbRBqKikKCUVycm9yQ29kZRILCgdFcnJU",
-            "ZXN0EAASDwoLRXJyUm9vbU5vbmUQZGIGcHJvdG8z"));
+            "Cg9Qcm90b0VudW0ucHJvdG8SBVByb3RvKusBCgdNc2dUeXBlEhEKDWVuUmVx",
+            "dWVzdFRlc3QQABITCg9lblJlc3BvbnNlc1Rlc3QQARIRCg1lblJlcXVlc3RM",
+            "aW5rEGMSEgoOZW5SZXNwb25zZUxpbmsQZBIXChNlblJlcXVlc3RDcmVhdGVS",
+            "b29tEGUSGAoUZW5SZXNwb25zZUNyZWF0ZVJvb20QZhIVChFlblJlcXVlc3RK",
+            "b2luUm9vbRBnEhYKEmVuUmVzcG9uc2VKb2luUm9vbRBoEhYKEmVuUmVxdWVz",
+            "dExlYXZlUm9vbRBpEhcKE2VuUmVzcG9uc2VMZWF2ZVJvb20QaiopCglFcnJv",
+            "ckNvZGUSCwoHRXJyVGVzdBAAEg8KC0VyclJvb21Ob25lEGRiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgType), typeof(global::Proto.ErrorCode), }, null, null));
@@ -43,9 +43,13 @@ namespace Proto {
     [pbr::OriginalName("enRequestTest")] EnRequestTest = 0,
     [pbr::OriginalName("enResponsesTest")] EnResponsesTest = 1,
     /// <summary>
+    ///客户端请求连接
+    /// </summary>
+    [pbr::OriginalName("enRequestLink")] EnRequestLink = 99,
+    /// <summary>
     ///客户端链接成功
     /// </summary>
-    [pbr::OriginalName("enResponseLinkSucces")] EnResponseLinkSucces = 100,
+    [pbr::OriginalName("enResponseLink")] EnResponseLink = 100,
     /// <summary>
     ///创建房间
     /// </summary>

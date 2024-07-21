@@ -1,15 +1,14 @@
 ﻿using Google.Protobuf;
 using Proto;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Text;
+
 
 namespace Server.Net
 {
     public class NetServer : Singleton<NetServer>
     {
-        private Dictionary<int, NetSession> listNetSession = new Dictionary<int, NetSession>();
+        private Dictionary<EndPoint, NetSession> listNetSession = new Dictionary<EndPoint, NetSession>();
         private string ip = "127.0.0.1";
         private int port = 1994;
         private Socket socket;
@@ -39,8 +38,7 @@ namespace Server.Net
             int size = socket.EndReceiveFrom(ar, ref clientEndPoint);
             byte[] data = new byte[size];
             Array.Copy(buffer, 0, data, 0, size);
-            Console.WriteLine(Encoding.UTF8.GetString(data));
-            Console.WriteLine(clientEndPoint.ToString());
+            NetSession netSession = GetNetSession(clientEndPoint);
             socket.BeginReceiveFrom(buffer, 0, 1024, SocketFlags.None, ref clientEndPoint, Receive, socket);
         }
 
@@ -50,5 +48,16 @@ namespace Server.Net
             NetEventHandle netEventHandle = new NetEventHandle(parser, callback);
             messageEventHandle[(int)msgType] = netEventHandle;
         }
+
+        private NetSession GetNetSession(EndPoint clientEndPoint)
+        {
+            if (!listNetSession.ContainsKey(clientEndPoint))
+            {
+                NetSession netSession = new NetSession();
+                listNetSession[clientEndPoint] = netSession;
+            }
+            return listNetSession[clientEndPoint];
+        }
+
     }
 }

@@ -10,17 +10,12 @@ namespace Server.Net
     public class NetSession
     {
         private NetPackage netPackage;
-        private Socket socket;
         public int userId;
-        private NetworkStream networkStream;
-        public NetSession(Socket socket, int userId)
+        public NetSession()
         {
             Console.WriteLine("客户端链接成功");
-            this.socket = socket;
             this.userId = userId;
             netPackage = new NetPackage();
-            networkStream = new NetworkStream(socket);
-            socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, netPackage);
         }
 
         public void SendMessage(MsgType msgType, IMessage message)
@@ -38,7 +33,6 @@ namespace Server.Net
         }
         private void SendMessage(byte[] data)
         {
-            networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
         }
 
         private void SendCallBack(IAsyncResult ar)
@@ -47,60 +41,11 @@ namespace Server.Net
 
         private void AsyncReceiveHead(IAsyncResult ar)
         {
-            try
-            {
-                int length = socket.EndReceive(ar);//本次接收的字节数
-                if (length <= 0)
-                {
-                    Console.WriteLine("已经下线");
-                    CloseSession();
-                    return;
-                }
-                netPackage.headIndex += length;
-                if (netPackage.headIndex < NetPackage.HeadLength)
-                {
-                    socket.BeginReceive(netPackage.headBuffer, netPackage.headIndex, NetPackage.HeadLength - netPackage.headIndex, SocketFlags.None, AsyncReceiveHead, socket);
-                }
-                else
-                {
-                    netPackage.InitBodyBuff();
-                    socket.BeginReceive(netPackage.bodyBuffer, 0, netPackage.bodyLength, SocketFlags.None, AsyncReceiveBody, socket);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("客户端非正常下线：" + ex.ToString());
-                CloseSession();
-            }
+            
         }
 
         private void AsyncReceiveBody(IAsyncResult ar)
         {
-            try
-            {
-                int length = socket.EndReceive(ar);//本次接收的字节数
-                if (length <= 0)
-                {
-                    Console.WriteLine("已经下线");
-                    CloseSession();
-                    return;
-                }
-                netPackage.bodyIndex += length;
-                if (netPackage.bodyIndex < netPackage.bodyLength)
-                {
-                    socket.BeginReceive(netPackage.bodyBuffer, netPackage.bodyIndex, netPackage.bodyLength - netPackage.bodyIndex, SocketFlags.None, AsyncReceiveBody, socket);
-                }
-                else
-                {
-                    AnalyseMessage();
-                    socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, socket);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("客户端非正常下线：" + ex.ToString());
-                CloseSession();
-            }
         }
         //解析协议
         private void AnalyseMessage()

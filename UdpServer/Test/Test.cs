@@ -11,14 +11,10 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            int num = 1;
-            byte[] data = BitConverter.GetBytes(num);
-            for (int i = 0; i < data.Length; i++)
-            {
-                Console.WriteLine(data[i]);
+            do {
+                Console.WriteLine("111");
             }
-            int aaa = BitConverter.ToInt32(data);
-            Console.WriteLine(  aaa);
+            while (false);
             Console.ReadKey();
         }
     }
