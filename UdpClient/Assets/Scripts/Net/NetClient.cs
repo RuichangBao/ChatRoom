@@ -102,7 +102,7 @@ namespace Net
         {
             byte[] messageData = message.ToByteArray();
             int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
-            byte[] msgTypeData = BitConverter.GetBytes((int)msgType);
+            byte[] msgTypeData = BitConverter.GetBytes((short)msgType);
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
             byte[] sendBuffer = new byte[length];
             msgTypeData.CopyTo(sendBuffer, NetPackage.HeadLength);

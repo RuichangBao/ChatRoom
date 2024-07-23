@@ -27,8 +27,8 @@ namespace Server.Net
         {
             byte[] messageData = message.ToByteArray();
             int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
-            byte[] bodyLengthData = BitConverter.GetBytes(bodyLength);
-            byte[] msgTypeData = BitConverter.GetBytes((int)msgType);
+            byte[] bodyLengthData = BitConverter.GetBytes((short)bodyLength);
+            byte[] msgTypeData = BitConverter.GetBytes((short)msgType);
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
             byte[] sendBuffer = new byte[length];
             bodyLengthData.CopyTo(sendBuffer, 0);

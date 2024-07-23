@@ -4,12 +4,12 @@ namespace Server.Net
 {
     public class NetPackage
     {
-        public const int MsgTypeLength = 4;//协议号长度
-        public const int HeadLength = 4;
+        public const short MsgTypeLength = 2;//协议号长度
+        public const int HeadLength = 2;
         public byte[] headBuffer = null;
         public int headIndex;
 
-        public int bodyLength = 0;
+        public short bodyLength = 0;
         public byte[] bodyBuffer = null;
         public int bodyIndex;
 
@@ -20,12 +20,12 @@ namespace Server.Net
         public void InitBodyBuff()
         {
             Console.WriteLine();
-            bodyLength = BitConverter.ToInt32(headBuffer, 0);
+            bodyLength = BitConverter.ToInt16(headBuffer, 0);
             bodyBuffer = new byte[bodyLength];
         }
         public int GetMsgType()
         {
-            int msgType = BitConverter.ToInt32(bodyBuffer, 0);
+            int msgType = BitConverter.ToInt16(bodyBuffer, 0);
             return msgType;
         }
         public IMessage GetMessage(MessageParser parser)

@@ -8,13 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="libs\" />
     <Folder Include="Proto\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Google.Protobuf">
-      <HintPath>libs\Protobuf\Google.Protobuf.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Google.Protobuf\Google.Protobuf.csproj" />
   </ItemGroup>
 
 </Project>

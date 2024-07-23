@@ -61,13 +61,13 @@
     <Compile Include="Assets\Scripts\Net\NetMsg.cs" />
     <Compile Include="Assets\Scripts\Net\NetEventHandle.cs" />
     <Compile Include="Assets\Scripts\Net\NetPackage.cs" />
+    <Compile Include="Assets\Scripts\Test.cs" />
     <Compile Include="Assets\Scripts\Net\NetClient.cs" />
+    <Compile Include="Assets\Scripts\Net\NetSendData.cs" />
     <Compile Include="Assets\Scripts\NetBehaviour.cs" />
     <Compile Include="Assets\Scripts\Interface\Singleton.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Proto\Proto.cs" />
-    <Compile Include="Assets\Scripts\Test.cs" />
-    <Compile Include="Assets\Scripts\Net\NetSendData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\libs\System.Buffers.dll" />
