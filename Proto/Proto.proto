@@ -36,6 +36,8 @@ message RequestJoinRoom{
   int32 roomId = 1;
 }
 message ResponseJoinRoom{
+  int32 roomId = 1;
+  repeated int32 users = 2;
 }
 //有人加入房间
 message ResponseOtherJoin{

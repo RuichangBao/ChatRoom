@@ -2,6 +2,7 @@ using Google.Protobuf;
 using Net;
 using Proto;
 using System;
+using System.Linq;
 using System.Threading;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
@@ -35,6 +36,7 @@ namespace UILogin
             {
                 return;
             }
+            SysRoom.Instance.CreateRoomData(response.RoomId);
             actionChat?.Invoke();
         }
 
@@ -60,6 +62,8 @@ namespace UILogin
             {
                 return;
             }
+            SysRoom.Instance.CreateRoomData(response.RoomId);
+            SysRoom.Instance.roomData.listUser = response.Users.ToList<int>();
             actionChat?.Invoke();
         }
     }
