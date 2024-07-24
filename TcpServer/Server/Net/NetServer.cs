@@ -55,11 +55,11 @@ namespace Server.Net
 
         private void LinkSuccesResponse(NetSession netSession)
         {
-            ResponseLinkSucces response = new ResponseLinkSucces
+            ResponseLink response = new ResponseLink
             {
                 UserId = netSession.userId
             };
-            netSession.SendMessage(MsgType.EnResponseLinkSucces, response);
+            netSession.SendMessage(MsgType.EnResponseLink, response);
         }
 
     }

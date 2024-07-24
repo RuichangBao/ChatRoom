@@ -30,13 +30,26 @@ namespace Server.Net
             byte[] bodyLengthData = BitConverter.GetBytes((short)bodyLength);
             byte[] msgTypeData = BitConverter.GetBytes((short)msgType);
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
+            byte[] sendBuffer = GetSendData( msgType,  message);
+            SendMessage(sendBuffer);
+        }
+        /// <summary>
+        /// 临时序列化接口
+        /// </summary>
+        public static byte[] GetSendData(MsgType msgType, IMessage message)
+        {
+            byte[] messageData = message.ToByteArray();
+            int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
+            byte[] bodyLengthData = BitConverter.GetBytes((short)bodyLength);
+            byte[] msgTypeData = BitConverter.GetBytes((short)msgType);
+            int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
             byte[] sendBuffer = new byte[length];
             bodyLengthData.CopyTo(sendBuffer, 0);
             msgTypeData.CopyTo(sendBuffer, NetPackage.HeadLength);
             messageData.CopyTo(sendBuffer, NetPackage.HeadLength + NetPackage.MsgTypeLength);
-            SendMessage(sendBuffer);
+            return sendBuffer;
         }
-        private void SendMessage(byte[] data)
+        public void SendMessage(byte[] data)
         {
             networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
         }

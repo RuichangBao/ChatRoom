@@ -6,14 +6,20 @@ package Proto;//导出cs的命名空间
 enum MsgType{
   enRequestTest = 0;
   enResponsesTest = 1;
-  enRequestLink = 99;   //客户端请求连接
-  enResponseLink = 100; //客户端链接成功
-  enRequestCreateRoom = 101;  //创建房间
-  enResponseCreateRoom = 102;
-  enRequestJoinRoom = 103;  //加入房间
-  enResponseJoinRoom = 104;
-  enRequestLeaveRoom = 105;//退出房间
-  enResponseLeaveRoom = 106;
+  enRequestLink = 100;   //客户端请求连接
+  enResponseLink = 101; //客户端链接成功
+  enRequestCreateRoom = 102;  //创建房间
+  enResponseCreateRoom = 103;
+  enRequestJoinRoom = 104;  //加入房间
+  enResponseJoinRoom = 105;
+  enResponseOtherJoin = 106; //有人加入房间
+  enRequestLeaveRoom = 107;//退出房间
+  enResponseLeaveRoom = 108;
+  enResponseOtherLeave = 109;//有人离开房间
+  enRequestSend = 200;  //客户端发送消息
+  enResponseSend = 201;
+
+  enResponseError = 3000;//服务器返回错误码
 }
 enum ErrorCode//错误码
 {
