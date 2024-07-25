@@ -7,32 +7,31 @@ namespace Server.Logic.SysRoom
     {
         public int roomId;
         public List<NetSession> listNetSessions = new List<NetSession>();
-        public List<UserData> listUserDatas;
         public RoomClass(int roomId)
         {
             this.roomId = roomId;
-            listUserDatas = new List<UserData>();
         }
         public void AddSession(NetSession netSession)
         {
             if (listNetSessions.Contains(netSession))
                 return;
             listNetSessions.Add(netSession);
-            listUserDatas.Add(new UserData { UserId = netSession.userId, Name = netSession.name });
         }
         public void RemoveSession(NetSession netSession)
         {
             if (!listNetSessions.Contains(netSession))
                 return;
             listNetSessions.Remove(netSession);
-            UserData userData = listUserDatas.Find((userData) => { return userData.UserId == netSession.userId; });
-            if (userData == null)
-                return;
-            listUserDatas.Remove(userData);
         }
 
-        public List<UserData> GetUsers(NetSession netSession)
+        public List<UserData> GetUsers()
         {
+            List<UserData> listUserDatas = new List<UserData>();
+            for (int i = 0,length = listNetSessions.Count; i < length; i++)
+            {
+                NetSession netSession = listNetSessions[i];
+                listUserDatas.Add(new UserData { UserId = netSession.userId, Name = netSession.name });
+            }
             return listUserDatas;
         }
 
@@ -44,6 +43,11 @@ namespace Server.Logic.SysRoom
                     return true;
             }
             return false;
+        }
+
+        public int GetUserNum()
+        {
+            return listNetSessions.Count;
         }
 
         public void BroadcastUserJoin(NetSession netSession)

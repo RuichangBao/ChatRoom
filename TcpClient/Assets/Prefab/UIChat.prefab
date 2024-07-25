@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1283266942}
   - component: {fileID: 1283266941}
   - component: {fileID: 7952449439935754474}
-  - component: {fileID: 3811095774899871116}
+  - component: {fileID: 4985175397669917670}
   m_Layer: 5
   m_Name: chat
   m_TagString: Untagged
@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 0}
-  m_SizeDelta: {x: 180, y: 0}
+  m_AnchoredPosition: {x: 250, y: 0}
+  m_SizeDelta: {x: 450, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1283266942
 CanvasRenderer:
@@ -75,13 +75,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440\u4F60\u597D\u5440"
+  m_Text: 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 --- !u!114 &7952449439935754474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &3811095774899871116
+--- !u!114 &4985175397669917670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,8 +146,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -231, y: 85}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: 0, y: 85}
+  m_SizeDelta: {x: 500, y: 830.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5731127587228607277
 CanvasRenderer:
@@ -335,8 +335,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 254, y: 0.000025431}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -354.2}
+  m_SizeDelta: {x: 500, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1715121519466676647
 CanvasRenderer:
@@ -601,7 +601,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 191}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3988559233371106525
 CanvasRenderer:
@@ -644,7 +644,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 111111111111111111111111111111111111111111111111111111
 --- !u!1 &4881380265115878563
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 5
+    m_Top: 30
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 5
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 720, y: 1280}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -937,7 +937,7 @@ MonoBehaviour:
   btnSend: {fileID: 2713398125122222592}
   btnClose: {fileID: 6586698718194214737}
   labRoomId: {fileID: 2101807299101150603}
-  chatClass: {fileID: 3811095774899871116}
+  chatClass: {fileID: 4985175397669917670}
 --- !u!1 &5750250951883882817
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,8 +975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 295, y: -60}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 0, y: -430}
+  m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2698926234548785413
 CanvasRenderer:

@@ -48,7 +48,7 @@ namespace Server.Logic.SysRoom
             RoomClass roomClass = CreateRoom(netSession);
             RoomData roomData = new RoomData();
             roomData.RoomId = roomClass.roomId;
-            roomData.UserData.Add(roomClass.GetUsers(netSession));
+            roomData.UserData.Add(roomClass.GetUsers());
             ResponseCreateRoom response = new ResponseCreateRoom();
             response.RoomData = roomData;
             netSession.SendMessage(MsgType.EnResponseCreateRoom, response);
@@ -77,7 +77,7 @@ namespace Server.Logic.SysRoom
             ResponseJoinRoom response = new ResponseJoinRoom();
             RoomData roomData = new RoomData();
             roomData.RoomId = roomClass.roomId;
-            roomData.UserData.Add(roomClass.GetUsers(netSession));
+            roomData.UserData.Add(roomClass.GetUsers());
             response.RoomData = roomData;
             netSession.SendMessage(MsgType.EnResponseJoinRoom, response);
         }
@@ -92,6 +92,12 @@ namespace Server.Logic.SysRoom
             }
             RoomClass roomClass = roomClasses[request.RoomId];
             roomClass.RemoveSession(netSession);
+            if (roomClass.GetUserNum() <= 0)//房间内没人了
+            {
+                roomClasses.Remove(roomClass.roomId);//关闭房间
+            }
+            ResponseLeaveRoom response = new ResponseLeaveRoom();
+            netSession.SendMessage(MsgType.EnResponseLeaveRoom, response);
             roomClass.BroadcastUserLeave(netSession.userId);
         }
 
