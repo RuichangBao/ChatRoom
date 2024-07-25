@@ -2,7 +2,7 @@ using Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace UILogin
+namespace UILogic
 {
     public class Main : MonoBehaviour
     {
@@ -10,12 +10,15 @@ namespace UILogin
         public UIChat uiChat;
         void Start()
         {
-            uiMain.actionChat = JoinRoom;
-        } 
-        private void JoinRoom()
+            SysRoom.Instance.actionOpenRoom = OpenRoom;
+            uiMain.gameObject.SetActive(true);
+            uiChat.gameObject.SetActive(false);
+        }
+        private void OpenRoom()
         {
             uiMain.gameObject.SetActive(false);
             uiChat.gameObject.SetActive(true);
         }
+
     }
 }

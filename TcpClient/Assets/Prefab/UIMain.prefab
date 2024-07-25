@@ -486,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7810905615825333419
 RectTransform:
   m_ObjectHideFlags: 0
@@ -585,6 +585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnCreateRoom: {fileID: 1357363914493925437}
   btnJoinRoom: {fileID: 926308576342399967}
+  InputFieldRoomId: {fileID: 528013816758818522}
 --- !u!1 &7399971982541037726
 GameObject:
   m_ObjectHideFlags: 0

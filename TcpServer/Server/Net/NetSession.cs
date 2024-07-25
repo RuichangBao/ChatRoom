@@ -32,7 +32,7 @@ namespace Server.Net
             byte[] bodyLengthData = BitConverter.GetBytes((short)bodyLength);
             byte[] msgTypeData = BitConverter.GetBytes((short)msgType);
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
-            byte[] sendBuffer = GetSendData( msgType,  message);
+            byte[] sendBuffer = GetSendData(msgType, message);
             SendMessage(sendBuffer);
         }
         /// <summary>
@@ -128,7 +128,7 @@ namespace Server.Net
             else
             {
                 IMessage message = netPackage.GetMessage(netEventHandle.parser);
-                Console.WriteLine("收到客户端协议：" + message);
+                Console.WriteLine($"收到客户端协议，msgType：{msgType},data:{message}");
                 netEventHandle.callBack(this, message);
             }
             netPackage.Reset();

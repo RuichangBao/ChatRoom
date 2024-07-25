@@ -57,11 +57,14 @@ message ResponseOtherLeave{
 message RequestSend{
   string msg = 1;
 } 
-message ResponseSend{}
+message ResponseSend{
+  string msg = 1;
+}
 
 //其他玩家发送消息
 message ResponseOtherSend{
-  string msg = 1;
+  int32 userId = 1;
+  string msg = 2;
 }
 
 message ResponseError{

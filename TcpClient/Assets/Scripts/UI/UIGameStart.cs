@@ -4,35 +4,36 @@ using Proto;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-public class UIGameStart : MonoBehaviour
+namespace UILogic
 {
-    //可以做成配置文件
-    private int port = 1994;
-    private string ip = "127.0.0.1";
-    public Button btnGameStart;
-
-    void Start()
+    public class UIGameStart : MonoBehaviour
     {
-        NetClient.Instance.Listen(MsgType.EnResponseLink, ResponseLink.Parser, _ResponseLinkSucces);
-        btnGameStart.onClick.AddListener(BtnGameStart);
-    }
+        //可以做成配置文件
+        private int port = 1994;
+        private string ip = "127.0.0.1";
+        public Button btnGameStart;
 
-    public void BtnGameStart()
-    {
-        NetClient.Instance.StartClient(ip, port);
-    }
-
-    private void _ResponseLinkSucces(IMessage message)
-    {
-        ResponseLink response = message as ResponseLink;
-        if (response == null)
+        void Start()
         {
-            Debug.LogError("消息转化错误");
-            return;
+            NetClient.Instance.Listen(MsgType.EnResponseLink, ResponseLink.Parser, _ResponseLinkSucces);
+            btnGameStart.onClick.AddListener(BtnGameStart);
         }
-        Debug.LogError(message.ToString());
-        SceneManager.LoadScene("Main");
-    }
 
+        public void BtnGameStart()
+        {
+            NetClient.Instance.StartClient(ip, port);
+        }
+
+        private void _ResponseLinkSucces(IMessage message)
+        {
+            ResponseLink response = message as ResponseLink;
+            if (response == null)
+            {
+                Debug.LogError("消息转化错误");
+                return;
+            }
+            Debug.LogError(message.ToString());
+            SceneManager.LoadScene("Main");
+        }
+    }
 }

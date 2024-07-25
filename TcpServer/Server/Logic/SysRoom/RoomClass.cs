@@ -31,9 +31,19 @@ namespace Server.Logic.SysRoom
             listUserDatas.Remove(userData);
         }
 
-        public List<UserData> GetUsers()
+        public List<UserData> GetUsers(NetSession netSession)
         {
             return listUserDatas;
+        }
+
+        public bool SessionInRoom(NetSession netSession)
+        {
+            for (int i = 0, length = listNetSessions.Count; i < length; i++)
+            {
+                if (netSession == listNetSessions[i])
+                    return true;
+            }
+            return false;
         }
 
         public void BroadcastUserJoin(NetSession netSession)
@@ -50,20 +60,34 @@ namespace Server.Logic.SysRoom
                 listNetSessions[i].SendMessage(data);
             }
         }
-        public void BroadcastUserLeave(NetSession netSession)
+        public void BroadcastUserLeave(int userId)
         {
             ResponseOtherLeave response = new ResponseOtherLeave
             {
-                UserId = netSession.userId,
+                UserId = userId,
             };
             byte[] data = NetSession.GetSendData(MsgType.EnResponseOtherLeave, response);
             for (int i = 0, length = listNetSessions.Count; i < length; i++)
             {
-                if (listNetSessions[i] == netSession)
+                if (listNetSessions[i].userId == userId)
                     continue;
                 listNetSessions[i].SendMessage(data);
             }
         }
-
+        public void BroadcastUserChat(int userId, string msg)
+        {
+            ResponseOtherSend response = new ResponseOtherSend
+            {
+                UserId = userId,
+                Msg = msg,
+            };
+            byte[] data = NetSession.GetSendData(MsgType.EnResponseOtherSend, response);
+            for (int i = 0, length = listNetSessions.Count; i < length; i++)
+            {
+                if (listNetSessions[i].userId == userId)
+                    continue;
+                listNetSessions[i].SendMessage(data);
+            }
+        }
     }
 }

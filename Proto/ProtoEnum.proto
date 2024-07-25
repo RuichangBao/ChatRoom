@@ -27,4 +27,5 @@ enum ErrorCode//错误码
 {
   ErrTest = 0;
   ErrRoomNone = 100;//房间不存在
+  ErrNoInRoom = 101;//不在房间内
 }

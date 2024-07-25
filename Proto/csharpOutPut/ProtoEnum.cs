@@ -32,9 +32,9 @@ namespace Proto {
             "c2VPdGhlckpvaW4QahIWChJlblJlcXVlc3RMZWF2ZVJvb20QaxIXChNlblJl",
             "c3BvbnNlTGVhdmVSb29tEGwSGAoUZW5SZXNwb25zZU90aGVyTGVhdmUQbRIS",
             "Cg1lblJlcXVlc3RTZW5kEMgBEhMKDmVuUmVzcG9uc2VTZW5kEMkBEhgKE2Vu",
-            "UmVzcG9uc2VPdGhlclNlbmQQygESFAoPZW5SZXNwb25zZUVycm9yELgXKikK",
-            "CUVycm9yQ29kZRILCgdFcnJUZXN0EAASDwoLRXJyUm9vbU5vbmUQZGIGcHJv",
-            "dG8z"));
+            "UmVzcG9uc2VPdGhlclNlbmQQygESFAoPZW5SZXNwb25zZUVycm9yELgXKjoK",
+            "CUVycm9yQ29kZRILCgdFcnJUZXN0EAASDwoLRXJyUm9vbU5vbmUQZBIPCgtF",
+            "cnJOb0luUm9vbRBlYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgType), typeof(global::Proto.ErrorCode), }, null, null));
@@ -95,6 +95,10 @@ namespace Proto {
     ///房间不存在
     /// </summary>
     [pbr::OriginalName("ErrRoomNone")] ErrRoomNone = 100,
+    /// <summary>
+    ///不在房间内
+    /// </summary>
+    [pbr::OriginalName("ErrNoInRoom")] ErrNoInRoom = 101,
   }
 
   #endregion
