@@ -1,5 +1,6 @@
 syntax = "proto3";// 指定使用proto3语法
 import "ProtoEnum.proto";
+import "Common.proto";
 package Proto;    //导出cs的命名空间
 
 // 定义一个消息，名为TestRequest
@@ -28,7 +29,7 @@ message RequestCreateRoom{
 
 }
 message ResponseCreateRoom{
-  int32 roomId = 1;
+  RoomData roomData = 1;
 }
 
 //加入房间
@@ -36,20 +37,18 @@ message RequestJoinRoom{
   int32 roomId = 1;
 }
 message ResponseJoinRoom{
-  int32 roomId = 1;
-  repeated int32 users = 2;
+  RoomData roomData = 1;
 }
 //有人加入房间
 message ResponseOtherJoin{
-  int32 userId = 1;
+  UserData userData = 1;
 }
 
 //退出房间
 message RequestLeaveRoom{
+  int32 roomId = 1;
 }
-
-message ResponseLeaveRoom{
-}
+message ResponseLeaveRoom{}
 //有人离开房间
 message ResponseOtherLeave{
   int32 userId = 1;
@@ -62,7 +61,7 @@ message ResponseSend{}
 
 //其他玩家发送消息
 message ResponseOtherSend{
-
+  string msg = 1;
 }
 
 message ResponseError{

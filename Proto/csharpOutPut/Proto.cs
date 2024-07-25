@@ -24,38 +24,39 @@ namespace Proto {
     static ProtoReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgtQcm90by5wcm90bxIFUHJvdG8aD1Byb3RvRW51bS5wcm90byI2CgtSZXF1",
-            "ZXN0VGVzdBIMCgRudW0xGAEgASgFEgwKBG51bTIYAiABKAUSCwoDc3RyGAMg",
-            "ASgJIjgKDVJlc3BvbnNlc1Rlc3QSCwoDc3RyGAEgASgJEgwKBG51bTEYAiAB",
-            "KAUSDAoEbnVtMhgDIAEoBSINCgtSZXF1ZXN0TGluayIeCgxSZXNwb25zZUxp",
-            "bmsSDgoGdXNlcklkGAEgASgFIhMKEVJlcXVlc3RDcmVhdGVSb29tIiQKElJl",
-            "c3BvbnNlQ3JlYXRlUm9vbRIOCgZyb29tSWQYASABKAUiIQoPUmVxdWVzdEpv",
-            "aW5Sb29tEg4KBnJvb21JZBgBIAEoBSIxChBSZXNwb25zZUpvaW5Sb29tEg4K",
-            "BnJvb21JZBgBIAEoBRINCgV1c2VycxgCIAMoBSIjChFSZXNwb25zZU90aGVy",
-            "Sm9pbhIOCgZ1c2VySWQYASABKAUiEgoQUmVxdWVzdExlYXZlUm9vbSITChFS",
-            "ZXNwb25zZUxlYXZlUm9vbSIkChJSZXNwb25zZU90aGVyTGVhdmUSDgoGdXNl",
-            "cklkGAEgASgFIhoKC1JlcXVlc3RTZW5kEgsKA21zZxgBIAEoCSIOCgxSZXNw",
-            "b25zZVNlbmQiEwoRUmVzcG9uc2VPdGhlclNlbmQiNAoNUmVzcG9uc2VFcnJv",
-            "chIjCgllcnJvckNvZGUYASABKA4yEC5Qcm90by5FcnJvckNvZGViBnByb3Rv",
-            "Mw=="));
+            "CgtQcm90by5wcm90bxIFUHJvdG8aD1Byb3RvRW51bS5wcm90bxoMQ29tbW9u",
+            "LnByb3RvIjYKC1JlcXVlc3RUZXN0EgwKBG51bTEYASABKAUSDAoEbnVtMhgC",
+            "IAEoBRILCgNzdHIYAyABKAkiOAoNUmVzcG9uc2VzVGVzdBILCgNzdHIYASAB",
+            "KAkSDAoEbnVtMRgCIAEoBRIMCgRudW0yGAMgASgFIg0KC1JlcXVlc3RMaW5r",
+            "Ih4KDFJlc3BvbnNlTGluaxIOCgZ1c2VySWQYASABKAUiEwoRUmVxdWVzdENy",
+            "ZWF0ZVJvb20iNwoSUmVzcG9uc2VDcmVhdGVSb29tEiEKCHJvb21EYXRhGAEg",
+            "ASgLMg8uUHJvdG8uUm9vbURhdGEiIQoPUmVxdWVzdEpvaW5Sb29tEg4KBnJv",
+            "b21JZBgBIAEoBSI1ChBSZXNwb25zZUpvaW5Sb29tEiEKCHJvb21EYXRhGAEg",
+            "ASgLMg8uUHJvdG8uUm9vbURhdGEiNgoRUmVzcG9uc2VPdGhlckpvaW4SIQoI",
+            "dXNlckRhdGEYASABKAsyDy5Qcm90by5Vc2VyRGF0YSIiChBSZXF1ZXN0TGVh",
+            "dmVSb29tEg4KBnJvb21JZBgBIAEoBSITChFSZXNwb25zZUxlYXZlUm9vbSIk",
+            "ChJSZXNwb25zZU90aGVyTGVhdmUSDgoGdXNlcklkGAEgASgFIhoKC1JlcXVl",
+            "c3RTZW5kEgsKA21zZxgBIAEoCSIOCgxSZXNwb25zZVNlbmQiIAoRUmVzcG9u",
+            "c2VPdGhlclNlbmQSCwoDbXNnGAEgASgJIjQKDVJlc3BvbnNlRXJyb3ISIwoJ",
+            "ZXJyb3JDb2RlGAEgASgOMhAuUHJvdG8uRXJyb3JDb2RlYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Proto.ProtoEnumReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Proto.ProtoEnumReflection.Descriptor, global::Proto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestTest), global::Proto.RequestTest.Parser, new[]{ "Num1", "Num2", "Str" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponsesTest), global::Proto.ResponsesTest.Parser, new[]{ "Str", "Num1", "Num2" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLink), global::Proto.RequestLink.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseLink), global::Proto.ResponseLink.Parser, new[]{ "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestCreateRoom), global::Proto.RequestCreateRoom.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseCreateRoom), global::Proto.ResponseCreateRoom.Parser, new[]{ "RoomId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseCreateRoom), global::Proto.ResponseCreateRoom.Parser, new[]{ "RoomData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestJoinRoom), global::Proto.RequestJoinRoom.Parser, new[]{ "RoomId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseJoinRoom), global::Proto.ResponseJoinRoom.Parser, new[]{ "RoomId", "Users" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseOtherJoin), global::Proto.ResponseOtherJoin.Parser, new[]{ "UserId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLeaveRoom), global::Proto.RequestLeaveRoom.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseJoinRoom), global::Proto.ResponseJoinRoom.Parser, new[]{ "RoomData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseOtherJoin), global::Proto.ResponseOtherJoin.Parser, new[]{ "UserData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLeaveRoom), global::Proto.RequestLeaveRoom.Parser, new[]{ "RoomId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseLeaveRoom), global::Proto.ResponseLeaveRoom.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseOtherLeave), global::Proto.ResponseOtherLeave.Parser, new[]{ "UserId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSend), global::Proto.RequestSend.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseSend), global::Proto.ResponseSend.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseOtherSend), global::Proto.ResponseOtherSend.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseOtherSend), global::Proto.ResponseOtherSend.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ResponseError), global::Proto.ResponseError.Parser, new[]{ "ErrorCode" }, null, null, null, null)
           }));
     }
@@ -1192,7 +1193,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ResponseCreateRoom(ResponseCreateRoom other) : this() {
-      roomId_ = other.roomId_;
+      roomData_ = other.roomData_ != null ? other.roomData_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1202,15 +1203,15 @@ namespace Proto {
       return new ResponseCreateRoom(this);
     }
 
-    /// <summary>Field number for the "roomId" field.</summary>
-    public const int RoomIdFieldNumber = 1;
-    private int roomId_;
+    /// <summary>Field number for the "roomData" field.</summary>
+    public const int RoomDataFieldNumber = 1;
+    private global::Proto.RoomData roomData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int RoomId {
-      get { return roomId_; }
+    public global::Proto.RoomData RoomData {
+      get { return roomData_; }
       set {
-        roomId_ = value;
+        roomData_ = value;
       }
     }
 
@@ -1229,7 +1230,7 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RoomId != other.RoomId) return false;
+      if (!object.Equals(RoomData, other.RoomData)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1237,7 +1238,7 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (RoomId != 0) hash ^= RoomId.GetHashCode();
+      if (roomData_ != null) hash ^= RoomData.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1256,9 +1257,9 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (RoomId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(RoomId);
+      if (roomData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(RoomData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1270,9 +1271,9 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (RoomId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(RoomId);
+      if (roomData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(RoomData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1284,8 +1285,8 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (RoomId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
+      if (roomData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RoomData);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1299,8 +1300,11 @@ namespace Proto {
       if (other == null) {
         return;
       }
-      if (other.RoomId != 0) {
-        RoomId = other.RoomId;
+      if (other.roomData_ != null) {
+        if (roomData_ == null) {
+          RoomData = new global::Proto.RoomData();
+        }
+        RoomData.MergeFrom(other.RoomData);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1321,8 +1325,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            RoomId = input.ReadInt32();
+          case 10: {
+            if (roomData_ == null) {
+              RoomData = new global::Proto.RoomData();
+            }
+            input.ReadMessage(RoomData);
             break;
           }
         }
@@ -1344,8 +1351,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            RoomId = input.ReadInt32();
+          case 10: {
+            if (roomData_ == null) {
+              RoomData = new global::Proto.RoomData();
+            }
+            input.ReadMessage(RoomData);
             break;
           }
         }
@@ -1591,8 +1601,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ResponseJoinRoom(ResponseJoinRoom other) : this() {
-      roomId_ = other.roomId_;
-      users_ = other.users_.Clone();
+      roomData_ = other.roomData_ != null ? other.roomData_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1602,27 +1611,16 @@ namespace Proto {
       return new ResponseJoinRoom(this);
     }
 
-    /// <summary>Field number for the "roomId" field.</summary>
-    public const int RoomIdFieldNumber = 1;
-    private int roomId_;
+    /// <summary>Field number for the "roomData" field.</summary>
+    public const int RoomDataFieldNumber = 1;
+    private global::Proto.RoomData roomData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int RoomId {
-      get { return roomId_; }
+    public global::Proto.RoomData RoomData {
+      get { return roomData_; }
       set {
-        roomId_ = value;
+        roomData_ = value;
       }
-    }
-
-    /// <summary>Field number for the "users" field.</summary>
-    public const int UsersFieldNumber = 2;
-    private static readonly pb::FieldCodec<int> _repeated_users_codec
-        = pb::FieldCodec.ForInt32(18);
-    private readonly pbc::RepeatedField<int> users_ = new pbc::RepeatedField<int>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<int> Users {
-      get { return users_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1640,8 +1638,7 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RoomId != other.RoomId) return false;
-      if(!users_.Equals(other.users_)) return false;
+      if (!object.Equals(RoomData, other.RoomData)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1649,8 +1646,7 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (RoomId != 0) hash ^= RoomId.GetHashCode();
-      hash ^= users_.GetHashCode();
+      if (roomData_ != null) hash ^= RoomData.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1669,11 +1665,10 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (RoomId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(RoomId);
+      if (roomData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(RoomData);
       }
-      users_.WriteTo(output, _repeated_users_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1684,11 +1679,10 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (RoomId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(RoomId);
+      if (roomData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(RoomData);
       }
-      users_.WriteTo(ref output, _repeated_users_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1699,10 +1693,9 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (RoomId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
+      if (roomData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RoomData);
       }
-      size += users_.CalculateSize(_repeated_users_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1715,10 +1708,12 @@ namespace Proto {
       if (other == null) {
         return;
       }
-      if (other.RoomId != 0) {
-        RoomId = other.RoomId;
+      if (other.roomData_ != null) {
+        if (roomData_ == null) {
+          RoomData = new global::Proto.RoomData();
+        }
+        RoomData.MergeFrom(other.RoomData);
       }
-      users_.Add(other.users_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1738,13 +1733,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            RoomId = input.ReadInt32();
-            break;
-          }
-          case 18:
-          case 16: {
-            users_.AddEntriesFrom(input, _repeated_users_codec);
+          case 10: {
+            if (roomData_ == null) {
+              RoomData = new global::Proto.RoomData();
+            }
+            input.ReadMessage(RoomData);
             break;
           }
         }
@@ -1766,13 +1759,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            RoomId = input.ReadInt32();
-            break;
-          }
-          case 18:
-          case 16: {
-            users_.AddEntriesFrom(ref input, _repeated_users_codec);
+          case 10: {
+            if (roomData_ == null) {
+              RoomData = new global::Proto.RoomData();
+            }
+            input.ReadMessage(RoomData);
             break;
           }
         }
@@ -1820,7 +1811,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ResponseOtherJoin(ResponseOtherJoin other) : this() {
-      userId_ = other.userId_;
+      userData_ = other.userData_ != null ? other.userData_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1830,15 +1821,15 @@ namespace Proto {
       return new ResponseOtherJoin(this);
     }
 
-    /// <summary>Field number for the "userId" field.</summary>
-    public const int UserIdFieldNumber = 1;
-    private int userId_;
+    /// <summary>Field number for the "userData" field.</summary>
+    public const int UserDataFieldNumber = 1;
+    private global::Proto.UserData userData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int UserId {
-      get { return userId_; }
+    public global::Proto.UserData UserData {
+      get { return userData_; }
       set {
-        userId_ = value;
+        userData_ = value;
       }
     }
 
@@ -1857,7 +1848,7 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (UserId != other.UserId) return false;
+      if (!object.Equals(UserData, other.UserData)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1865,7 +1856,7 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (UserId != 0) hash ^= UserId.GetHashCode();
+      if (userData_ != null) hash ^= UserData.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1884,9 +1875,9 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (UserId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(UserId);
+      if (userData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(UserData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1898,9 +1889,9 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (UserId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(UserId);
+      if (userData_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(UserData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1912,8 +1903,8 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (UserId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UserId);
+      if (userData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UserData);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1927,8 +1918,11 @@ namespace Proto {
       if (other == null) {
         return;
       }
-      if (other.UserId != 0) {
-        UserId = other.UserId;
+      if (other.userData_ != null) {
+        if (userData_ == null) {
+          UserData = new global::Proto.UserData();
+        }
+        UserData.MergeFrom(other.UserData);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1949,8 +1943,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            UserId = input.ReadInt32();
+          case 10: {
+            if (userData_ == null) {
+              UserData = new global::Proto.UserData();
+            }
+            input.ReadMessage(UserData);
             break;
           }
         }
@@ -1972,8 +1969,11 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            UserId = input.ReadInt32();
+          case 10: {
+            if (userData_ == null) {
+              UserData = new global::Proto.UserData();
+            }
+            input.ReadMessage(UserData);
             break;
           }
         }
@@ -2021,6 +2021,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RequestLeaveRoom(RequestLeaveRoom other) : this() {
+      roomId_ = other.roomId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2028,6 +2029,18 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RequestLeaveRoom Clone() {
       return new RequestLeaveRoom(this);
+    }
+
+    /// <summary>Field number for the "roomId" field.</summary>
+    public const int RoomIdFieldNumber = 1;
+    private int roomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RoomId {
+      get { return roomId_; }
+      set {
+        roomId_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2045,6 +2058,7 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (RoomId != other.RoomId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2052,6 +2066,7 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (RoomId != 0) hash ^= RoomId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2070,6 +2085,10 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (RoomId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(RoomId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2080,6 +2099,10 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (RoomId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(RoomId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2090,6 +2113,9 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (RoomId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2101,6 +2127,9 @@ namespace Proto {
     public void MergeFrom(RequestLeaveRoom other) {
       if (other == null) {
         return;
+      }
+      if (other.RoomId != 0) {
+        RoomId = other.RoomId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2121,6 +2150,10 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            RoomId = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -2140,6 +2173,10 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 8: {
+            RoomId = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -2909,6 +2946,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ResponseOtherSend(ResponseOtherSend other) : this() {
+      msg_ = other.msg_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2916,6 +2954,18 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ResponseOtherSend Clone() {
       return new ResponseOtherSend(this);
+    }
+
+    /// <summary>Field number for the "msg" field.</summary>
+    public const int MsgFieldNumber = 1;
+    private string msg_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Msg {
+      get { return msg_; }
+      set {
+        msg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2933,6 +2983,7 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Msg != other.Msg) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2940,6 +2991,7 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (Msg.Length != 0) hash ^= Msg.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2958,6 +3010,10 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (Msg.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Msg);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2968,6 +3024,10 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Msg.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Msg);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2978,6 +3038,9 @@ namespace Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (Msg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2989,6 +3052,9 @@ namespace Proto {
     public void MergeFrom(ResponseOtherSend other) {
       if (other == null) {
         return;
+      }
+      if (other.Msg.Length != 0) {
+        Msg = other.Msg;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3009,6 +3075,10 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            Msg = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -3028,6 +3098,10 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 10: {
+            Msg = input.ReadString();
+            break;
+          }
         }
       }
     }

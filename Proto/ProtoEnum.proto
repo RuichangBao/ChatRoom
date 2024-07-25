@@ -16,8 +16,10 @@ enum MsgType{
   enRequestLeaveRoom = 107;//退出房间
   enResponseLeaveRoom = 108;
   enResponseOtherLeave = 109;//有人离开房间
+  
   enRequestSend = 200;  //客户端发送消息
   enResponseSend = 201;
+  enResponseOtherSend = 202;
 
   enResponseError = 3000;//服务器返回错误码
 }

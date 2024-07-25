@@ -12,12 +12,14 @@ namespace Server.Net
         private NetPackage netPackage;
         private Socket socket;
         public int userId;
+        public string name;
         private NetworkStream networkStream;
         public NetSession(Socket socket, int userId)
         {
             Console.WriteLine("客户端链接成功");
             this.socket = socket;
             this.userId = userId;
+            this.name = userId.ToString();
             netPackage = new NetPackage();
             networkStream = new NetworkStream(socket);
             socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, netPackage);

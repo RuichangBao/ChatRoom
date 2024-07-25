@@ -1,0 +1,12 @@
+syntax = "proto3";// 指定使用proto3语法
+package Proto;    //导出cs的命名空间
+
+// 定义一个消息，名为TestRequest
+message UserData{ 
+  int32 userId = 1; // 页码
+  string name = 2; // 每页结果数
+}
+message RoomData{
+  int32 roomId = 1;
+  repeated UserData userData = 2;
+}

@@ -7,20 +7,21 @@ namespace Server.Logic.SysRoom
     public class SysRoom : Singleton<SysRoom>
     {
         public int roomIndex = 0;
-        private Dictionary<int, RoomData> roomDatas = new Dictionary<int, RoomData>();
+        private Dictionary<int, RoomClass> roomDatas = new Dictionary<int, RoomClass>();
         public override void Init()
         {
             base.Init();
             NetServer.Instance.Listen(MsgType.EnRequestCreateRoom, RequestCreateRoom.Parser, _RequestCreateRoom);
-            NetServer.Instance.Listen(MsgType.EnRequestJoinRoom, RequestJoinRoom.Parser, JoinRoom);
+            NetServer.Instance.Listen(MsgType.EnRequestJoinRoom, RequestJoinRoom.Parser, _RequestJoinRoom);
+            NetServer.Instance.Listen(MsgType.EnRequestLeaveRoom, RequestLeaveRoom.Parser, _RequestLeaveRoom);
         }
 
-        private int CreateRoom(NetSession netSession)
+        private RoomClass CreateRoom(NetSession netSession)
         {
             roomIndex++;
-            RoomData roomData = new RoomData(roomIndex);
+            RoomClass roomData = new RoomClass(roomIndex);
             roomData.AddSession(netSession);
-            return roomIndex;
+            return roomData;
         }
 
         #region 协议
@@ -32,15 +33,15 @@ namespace Server.Logic.SysRoom
                 Console.WriteLine("创建房间错误：");
                 return;
             }
-            int roomId = CreateRoom(netSession);
-
-            ResponseCreateRoom response = new ResponseCreateRoom
-            {
-                RoomId = roomId,
-            };
+            RoomClass roomClass = CreateRoom(netSession);
+            RoomData roomData = new RoomData();
+            roomData.RoomId = roomClass.roomId;
+            roomData.UserData.Add(roomClass.GetUsers());
+            ResponseCreateRoom response = new ResponseCreateRoom();
+            response.RoomData = roomData;
             netSession.SendMessage(MsgType.EnResponseCreateRoom, response);
         }
-        public void JoinRoom(NetSession netSession, IMessage message)
+        public void _RequestJoinRoom(NetSession netSession, IMessage message)
         {
             RequestJoinRoom request = message as RequestJoinRoom;
             if (request == null)
@@ -57,12 +58,25 @@ namespace Server.Logic.SysRoom
                 netSession.SendMessage(MsgType.EnResponseError, responseError);
                 return;
             }
-            RoomData roomData = roomDatas[request.RoomId];
+            RoomClass roomData = roomDatas[request.RoomId];
             roomData.AddSession(netSession);
             roomData.BroadcastUserJoin(netSession);
 
             ResponseJoinRoom response = new ResponseJoinRoom();
             netSession.SendMessage(MsgType.EnResponseJoinRoom, response);
+        }
+
+        public void _RequestLeaveRoom(NetSession netSession, IMessage message)
+        {
+            RequestLeaveRoom request = message as RequestLeaveRoom; 
+            if (request == null)
+            {
+                Console.WriteLine("离开房间错误：");
+                return;
+            }
+            RoomClass roomData = roomDatas[request.RoomId];
+            roomData.RemoveSession(netSession);
+            roomData.BroadcastUserLeave(netSession);
         }
 
         #endregion

@@ -36,7 +36,7 @@ namespace UILogin
             {
                 return;
             }
-            SysRoom.Instance.CreateRoomData(response.RoomId);
+            SysRoom.Instance.CreateRoomData(response.RoomData);
             actionChat?.Invoke();
         }
 
@@ -62,8 +62,7 @@ namespace UILogin
             {
                 return;
             }
-            SysRoom.Instance.CreateRoomData(response.RoomId);
-            SysRoom.Instance.roomData.listUser = response.Users.ToList<int>();
+            SysRoom.Instance.CreateRoomData(response.RoomData);
             actionChat?.Invoke();
         }
     }
