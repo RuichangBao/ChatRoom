@@ -56,7 +56,7 @@ namespace Server.Logic.SysRoom
             {
                 UserData = new UserData { UserId = netSession.userId, Name = netSession.name }
             };
-            byte[] data = NetSession.GetSendData(MsgType.EnResponseOtherJoin, response);
+            byte[] data = NetSerializeUtil.Serialize(MsgType.EnResponseOtherJoin, response);
             for (int i = 0, length = listNetSessions.Count; i < length; i++)
             {
                 if (listNetSessions[i] == netSession)
@@ -70,7 +70,7 @@ namespace Server.Logic.SysRoom
             {
                 UserId = userId,
             };
-            byte[] data = NetSession.GetSendData(MsgType.EnResponseOtherLeave, response);
+            byte[] data = NetSerializeUtil.Serialize(MsgType.EnResponseOtherLeave, response);
             for (int i = 0, length = listNetSessions.Count; i < length; i++)
             {
                 if (listNetSessions[i].userId == userId)
@@ -85,7 +85,7 @@ namespace Server.Logic.SysRoom
                 UserId = userId,
                 Msg = msg,
             };
-            byte[] data = NetSession.GetSendData(MsgType.EnResponseOtherSend, response);
+            byte[] data = NetSerializeUtil.Serialize(MsgType.EnResponseOtherSend, response);
             for (int i = 0, length = listNetSessions.Count; i < length; i++)
             {
                 if (listNetSessions[i].userId == userId)

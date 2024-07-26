@@ -27,29 +27,10 @@ namespace Server.Net
 
         public void SendMessage(MsgType msgType, IMessage message)
         {
-            byte[] sendBuffer = GetSendData(msgType, message);
+            byte[] sendBuffer = NetSerializeUtil.Serialize(msgType, message);
             SendMessage(sendBuffer);
         }
-        /// <summary>
-        /// 临时序列化接口
-        /// </summary>
-        public static byte[] GetSendData(MsgType msgType, IMessage message)
-        {
-            byte[] messageData = message.ToByteArray();
-            //数据包长度
-            int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
-            int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
-            byte[] sendBuffer = new byte[length];
-            //长度
-            sendBuffer[0] = (byte)bodyLength;
-            sendBuffer[1] = (byte)(bodyLength >> 8);
-            //MsgType 协议号
-            ushort cmd = (ushort)msgType;
-            sendBuffer[2] = (byte)cmd;
-            sendBuffer[3] = (byte)(cmd >> 8);
-            messageData.CopyTo(sendBuffer, NetPackage.HeadLength + NetPackage.MsgTypeLength);
-            return sendBuffer;
-        }
+
         public void SendMessage(byte[] data)
         {
             networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);

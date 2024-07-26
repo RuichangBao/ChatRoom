@@ -111,16 +111,25 @@ namespace Net
             byte[] messageData = message.ToByteArray();
             int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
-            byte[] sendBuffer = new byte[length];
+            byte[] datas = new byte[length];
             //长度
-            sendBuffer[0] = (byte)bodyLength;
-            sendBuffer[1] = (byte)(bodyLength >> 8);
+            datas[0] = (byte)bodyLength;
+            datas[1] = (byte)(bodyLength >> 8);
             //MsgType 协议号
             ushort cmd = (ushort)msgType;
-            sendBuffer[2] = (byte)cmd;
-            sendBuffer[3] = (byte)(cmd >> 8);
-            messageData.CopyTo(sendBuffer, NetPackage.HeadLength + NetPackage.MsgTypeLength);
-            SendMessage(sendBuffer);
+            datas[2] = (byte)cmd;
+            datas[3] = (byte)(cmd >> 8);
+            messageData.CopyTo(datas, NetPackage.HeadLength + NetPackage.MsgTypeLength);
+            SendMessage(datas);
+            {
+                Debug.LogError(datas[0]);
+                Debug.LogError(datas[1]);
+                byte[]AAA = BitConverter.GetBytes((ushort)bodyLength);
+                Debug.LogError(AAA[0]);
+                Debug.LogError(AAA[1]);
+                Debug.LogError(datas[2]);
+                Debug.LogError(datas[3]);
+            }
         }
         private void SendMessage(byte[] data)
         {
