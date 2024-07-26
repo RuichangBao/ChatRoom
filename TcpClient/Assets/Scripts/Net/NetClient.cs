@@ -13,7 +13,7 @@ namespace Net
         private Socket socket;
 
         private NetPackage netPackage;
-        private Dictionary<int, NetEventHandle> messageEventHandle = new Dictionary<int, NetEventHandle>();
+        private Dictionary<ushort, NetEventHandle> messageEventHandle = new Dictionary<ushort, NetEventHandle>();
         private Queue<NetMsg> recevieMessage = new Queue<NetMsg>();
         private NetworkStream networkStream;
 
@@ -85,7 +85,7 @@ namespace Net
         //解析协议
         private void AnalyseMessage()
         {
-            int msgType = netPackage.GetMsgType();
+            ushort msgType = netPackage.GetMsgType();
             if (!messageEventHandle.TryGetValue(msgType, out NetEventHandle netEventHandle))
             {
                 Debug.LogError("协议未注册：" + msgType);
@@ -103,19 +103,22 @@ namespace Net
         public void Listen(MsgType msgType, MessageParser parser, Action<IMessage> callBack)
         {
             NetEventHandle netEventHandle = new NetEventHandle(parser, callBack);
-            messageEventHandle[(int)msgType] = netEventHandle;
+            messageEventHandle[(ushort)msgType] = netEventHandle;
         }
 
         public void SendMessage(MsgType msgType, IMessage message)
         {
             byte[] messageData = message.ToByteArray();
             int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
-            byte[] bodyLengthData = BitConverter.GetBytes((short)bodyLength);
-            byte[] msgTypeData = BitConverter.GetBytes((short)msgType);
             int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
             byte[] sendBuffer = new byte[length];
-            bodyLengthData.CopyTo(sendBuffer, 0);
-            msgTypeData.CopyTo(sendBuffer, NetPackage.HeadLength);
+            //长度
+            sendBuffer[0] = (byte)bodyLength;
+            sendBuffer[1] = (byte)(bodyLength >> 8);
+            //MsgType 协议号
+            ushort cmd = (ushort)msgType;
+            sendBuffer[2] = (byte)cmd;
+            sendBuffer[3] = (byte)(cmd >> 8);
             messageData.CopyTo(sendBuffer, NetPackage.HeadLength + NetPackage.MsgTypeLength);
             SendMessage(sendBuffer);
         }

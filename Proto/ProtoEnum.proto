@@ -1,8 +1,8 @@
 syntax = "proto3"; // 指定使用proto3语法
 package Proto;//导出cs的命名空间
-
 //ProtoEnum.proto 导出cs的文件名
 
+//在C#中用ushort接收MsgType,所以 协议号不能大于ushort.MaxValue(65535)
 enum MsgType{
   enRequestTest = 0;
   enResponsesTest = 1;

@@ -6,12 +6,12 @@ namespace Net
 {
     public class NetPackage
     {
-        public const short MsgTypeLength = 2;//协议号长度
-        public const short HeadLength = 2;
+        public const ushort MsgTypeLength = 2;//协议号长度
+        public const ushort HeadLength = 2;
         public byte[] headBuffer = null;
         public int headIndex;
 
-        public short bodyLength = 0;
+        public ushort bodyLength = 0;
         public byte[] bodyBuffer = null;
         public int bodyIndex;
 
@@ -22,12 +22,13 @@ namespace Net
         public void InitBodyBuff()
         {
             bodyIndex = 0;
-            bodyLength = BitConverter.ToInt16(headBuffer, 0);
+            bodyLength = (ushort)(headBuffer[0] | (headBuffer[1] << 8));
             bodyBuffer = new byte[bodyLength];
         }
-        public int GetMsgType()
+        public ushort GetMsgType()
         {
-            int msgType = BitConverter.ToInt16(bodyBuffer, 0);
+            //C#小端，高位在右
+            ushort msgType = (ushort)(bodyBuffer[0] | (bodyBuffer[1] << 8));
             return msgType;
         }
         public IMessage GetMessage(MessageParser parser)

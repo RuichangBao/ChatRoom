@@ -60,6 +60,8 @@
     <Compile Include="Assets\Scripts\UI\UIGameStart.cs" />
     <Compile Include="Assets\Scripts\Proto\ProtoEnum.cs" />
     <Compile Include="Assets\Scripts\UI\UIChat\UIChat.cs" />
+    <Compile Include="Assets\Scripts\Proto\Common.cs" />
+    <Compile Include="Assets\Scripts\UI\UIChat\ChatClass.cs" />
     <Compile Include="Assets\Scripts\Net\NetMsg.cs" />
     <Compile Include="Assets\Scripts\Net\NetEventHandle.cs" />
     <Compile Include="Assets\Scripts\Net\NetPackage.cs" />
@@ -69,8 +71,6 @@
     <Compile Include="Assets\Scripts\Interface\Singleton.cs" />
     <Compile Include="Assets\Scripts\UI\UIMain.cs" />
     <Compile Include="Assets\Scripts\Proto\Proto.cs" />
-    <Compile Include="Assets\Scripts\Proto\Common.cs" />
-    <Compile Include="Assets\Scripts\UI\UIChat\ChatClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\libs\protobuf\Google.Protobuf.xml" />
