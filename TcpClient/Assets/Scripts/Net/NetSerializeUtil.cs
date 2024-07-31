@@ -35,15 +35,19 @@ namespace Net
                 key = GetNextRandomKey(key);
             }
         }
+        static int key1 = 32423432;
+        static int key2 = 4652123;
+        static int key3 = 253;
+        public static byte GetNextRandomKey(byte key)
+        {
+            int nextKey = key * key1 % key2 % key3;
+            return (byte)nextKey;
+        }
         public static byte RandomKey()
         {
             byte key = (byte)random.Next(int.MaxValue);
             return key;
         }
-        public static byte GetNextRandomKey(byte key)
-        {
-            int nextKey = key * 37817 % 66817 % 253;
-            return (byte)nextKey;
-        }
+       
     }
 }
