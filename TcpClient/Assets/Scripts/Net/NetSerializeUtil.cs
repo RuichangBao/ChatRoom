@@ -1,8 +1,8 @@
 ﻿using Google.Protobuf;
 using Proto;
+using System;
 
-
-namespace Server.Net
+namespace Net
 {
     public class NetSerializeUtil
     {
@@ -17,16 +17,13 @@ namespace Server.Net
             //长度
             datas[0] = (byte)bodyLength;
             datas[1] = (byte)(bodyLength >> 8);
-            //密钥
             datas[2] = RandomKey();
             //MsgType 协议号
             ushort cmd = (ushort)msgType;
             datas[3] = (byte)cmd;
             datas[4] = (byte)(cmd >> 8);
             messageData.CopyTo(datas, NetPackage.AllHeadLength);
-            Console.WriteLine($"加密前：{datas.ToString(2)}");
             EncryptData(datas, datas[2], 3);
-            Console.WriteLine($"加密后：{datas.ToString(2)}");
             return datas;
         }
         ///<summary>协议加密解密</summary>

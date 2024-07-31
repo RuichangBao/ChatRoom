@@ -39,13 +39,22 @@ namespace Server.Net
         {
             Socket clientSocket = socket.EndAccept(ar);
             userId++;
-            NetSession netSession = new NetSession(clientSocket, userId);
+            NetSession netSession = NetSession.GetFetch(clientSocket, userId, CloseSession);
             listNetSession.Add(userId, netSession);
             socket.BeginAccept(AcceptCallBack, socket);//监听下个接入的客户端
             LinkSuccesResponse(netSession);//向客户端发送链接成功协议
         }
         #endregion
 
+
+        private void CloseSession(int userId)
+        {
+            if (!listNetSession.ContainsKey(userId))
+                return;
+            NetSession netSession = listNetSession[userId];
+            netSession.Recycle();
+            listNetSession.Remove(userId);
+        }
 
         internal void Listen(MsgType msgType, MessageParser parser, Action<NetSession,IMessage> callback)
         {

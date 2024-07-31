@@ -178,18 +178,18 @@ namespace Proto {
       return Equals(_unknownFields, other._unknownFields);
     }
 
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Num1 != 0) hash ^= Num1.GetHashCode();
-      if (Num2 != 0) hash ^= Num2.GetHashCode();
-      if (Str.Length != 0) hash ^= Str.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
+    //[global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    //[global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    //public override int GetHashCode() {
+    //  int hash = 1;
+    //  if (Num1 != 0) hash ^= Num1.GetHashCode();
+    //  if (Num2 != 0) hash ^= Num2.GetHashCode();
+    //  if (Str.Length != 0) hash ^= Str.GetHashCode();
+    //  if (_unknownFields != null) {
+    //    hash ^= _unknownFields.GetHashCode();
+    //  }
+    //  return hash;
+    //}
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]

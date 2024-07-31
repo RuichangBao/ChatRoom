@@ -80,6 +80,7 @@ namespace Net
                 AnalyseMessage();
                 socket.BeginReceive(netPackage.headBuffer, netPackage.headIndex, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, socket);
             }
+
         }
 
         //解析协议
@@ -108,28 +109,8 @@ namespace Net
 
         public void SendMessage(MsgType msgType, IMessage message)
         {
-            byte[] messageData = message.ToByteArray();
-            int bodyLength = messageData.Length + NetPackage.MsgTypeLength;
-            int length = bodyLength + NetPackage.HeadLength;//最终发送协议包长度
-            byte[] datas = new byte[length];
-            //长度
-            datas[0] = (byte)bodyLength;
-            datas[1] = (byte)(bodyLength >> 8);
-            //MsgType 协议号
-            ushort cmd = (ushort)msgType;
-            datas[2] = (byte)cmd;
-            datas[3] = (byte)(cmd >> 8);
-            messageData.CopyTo(datas, NetPackage.HeadLength + NetPackage.MsgTypeLength);
+            byte[] datas = NetSerializeUtil.Serialize(msgType, message);
             SendMessage(datas);
-            {
-                Debug.LogError(datas[0]);
-                Debug.LogError(datas[1]);
-                byte[]AAA = BitConverter.GetBytes((ushort)bodyLength);
-                Debug.LogError(AAA[0]);
-                Debug.LogError(AAA[1]);
-                Debug.LogError(datas[2]);
-                Debug.LogError(datas[3]);
-            }
         }
         private void SendMessage(byte[] data)
         {

@@ -6,8 +6,10 @@ namespace Net
 {
     public class NetPackage
     {
-        public const ushort MsgTypeLength = 2;//协议号长度
+        public const ushort MsgTypeLength = 2;  //协议号长度
+        public const byte KeyLength = 1;        //密钥长度
         public const ushort HeadLength = 2;
+        public const ushort AllHeadLength = 5;
         public byte[] headBuffer = null;
         public int headIndex;
 
@@ -27,13 +29,17 @@ namespace Net
         }
         public ushort GetMsgType()
         {
+            byte key = bodyBuffer[0];
+            NetSerializeUtil.EncryptData(bodyBuffer, key, 1);
             //C#小端，高位在右
-            ushort msgType = (ushort)(bodyBuffer[0] | (bodyBuffer[1] << 8));
+            ushort msgType = (ushort)(bodyBuffer[1] | (bodyBuffer[2] << 8));
             return msgType;
         }
         public IMessage GetMessage(MessageParser parser)
         {
-            IMessage message = parser.ParseFrom(bodyBuffer, MsgTypeLength, bodyLength - MsgTypeLength);
+            byte[] data = new byte[bodyLength - KeyLength - HeadLength];
+            Array.Copy(bodyBuffer, KeyLength + HeadLength, data, 0, bodyLength - KeyLength - HeadLength);
+            IMessage message = parser.ParseFrom(data);
             return message;
         }
         public void Reset()

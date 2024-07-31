@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf;
+using Pool;
 using Proto;
 using System.Net.Sockets;
 
@@ -14,16 +15,7 @@ namespace Server.Net
         public int userId;
         public string name;
         private NetworkStream networkStream;
-        public NetSession(Socket socket, int userId)
-        {
-            Console.WriteLine("客户端链接成功");
-            this.socket = socket;
-            this.userId = userId;
-            this.name = userId.ToString();
-            netPackage = new NetPackage();
-            networkStream = new NetworkStream(socket);
-            socket.BeginReceive(netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, AsyncReceiveHead, netPackage);
-        }
+        private Action<int> closeSession;
 
         public void SendMessage(MsgType msgType, IMessage message)
         {
@@ -115,7 +107,37 @@ namespace Server.Net
         }
         private void CloseSession()
         {
-
+            if (socket != null)
+            {
+                socket.Close();
+                socket.Dispose();
+            }
+            closeSession?.Invoke(userId);
         }
+
+        #region 对象池
+        public static NetSession GetFetch(Socket socket, int userId,Action<int> closeSession)
+        {
+            NetSession netSession = PoolManager.GetFetch<NetSession>();
+            netSession.socket = socket;
+            netSession.userId = userId;
+            netSession.name = userId.ToString();
+            netSession.netPackage = NetPackage.GetFetch();
+            netSession.networkStream = new NetworkStream(socket);
+            netSession.socket.BeginReceive(netSession.netPackage.headBuffer, 0, NetPackage.HeadLength, SocketFlags.None, netSession.AsyncReceiveHead, netSession.netPackage);
+            netSession.closeSession = closeSession;
+            return netSession;
+        }
+        public void Recycle()
+        {
+            this.netPackage.Recycle();
+            this.netPackage = null;
+            this.socket = null;
+            this.userId = 0;
+            this.name = null;
+            this.networkStream = null;
+            PoolManager.Recycle(this);
+        }
+        #endregion
     }
 }
