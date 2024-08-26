@@ -15,6 +15,7 @@ namespace Server.Logic.SysRoom
             NetServer.Instance.Listen(MsgType.EnRequestJoinRoom, RequestJoinRoom.Parser, _RequestJoinRoom);
             NetServer.Instance.Listen(MsgType.EnRequestLeaveRoom, RequestLeaveRoom.Parser, _RequestLeaveRoom);
             NetServer.Instance.Listen(MsgType.EnRequestSend, RequestSend.Parser, _RequestSend);
+            NetServer.Instance.Listen(MsgType.EnRequestTest, RequestTest.Parser, _RequestTest);
         }
 
         private RoomClass CreateRoom(NetSession netSession)
@@ -100,7 +101,10 @@ namespace Server.Logic.SysRoom
             netSession.SendMessage(MsgType.EnResponseLeaveRoom, response);
             roomClass.BroadcastUserLeave(netSession.userId);
         }
-
+        private void _RequestTest(NetSession netSession, IMessage message)
+        {
+            
+        }
         private void _RequestSend(NetSession netSession, IMessage message)
         {
             RequestSend request = message as RequestSend;

@@ -71,8 +71,9 @@ public class SysRoom : Singleton<SysRoom>
     //创建房间
     public void RequestCreateRoom()
     {
-        RequestCreateRoom request = new RequestCreateRoom();
-        NetClient.Instance.SendMessage(MsgType.EnRequestCreateRoom, request);
+        //RequestCreateRoom request = new RequestCreateRoom();
+        //NetClient.Instance.SendMessage(MsgType.EnRequestCreateRoom, request);
+        NetClient.Instance.TestSendMessage();
     }
     private void _ResponseCreateRoom(IMessage message)
     {

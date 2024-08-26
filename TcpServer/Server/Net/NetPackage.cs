@@ -27,7 +27,7 @@ namespace Server.Net
         public ushort GetMsgType()
         {
             byte key = bodyBuffer[0];
-            NetSerializeUtil.EncryptData(bodyBuffer, key, 1);
+            //NetSerializeUtil.EncryptData(bodyBuffer, key, 1);
             //C#小端，高位在右
             ushort msgType = (ushort)(bodyBuffer[1] | (bodyBuffer[2] << 8));
             return msgType;

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 
+
 namespace Net
 {
     public class NetClient : Singleton<NetClient>
@@ -116,6 +117,23 @@ namespace Net
         {
             networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
         }
+
+        public void TestSendMessage()
+        {
+            byte[] datas = new byte[1024];
+            for (int i = 0; i < 100; i++)
+            {
+                string str = $"{i}{i}{i}{i}{i}{i}{i}{i}{i}{i}";
+                RequestTest requestTest = new RequestTest
+                {
+                    Str = str
+                };
+                byte[] data = NetSerializeUtil.Serialize(MsgType.EnRequestTest, requestTest);
+                data.CopyTo(datas, 0);
+                networkStream.BeginWrite(datas, 0, data.Length, SendCallBack, networkStream);
+            }
+        }
+
         private void SendCallBack(IAsyncResult ar)
         {
         }

@@ -23,7 +23,7 @@ namespace Net
             datas[3] = (byte)cmd;
             datas[4] = (byte)(cmd >> 8);
             messageData.CopyTo(datas, NetPackage.AllHeadLength);
-            EncryptData(datas, datas[2], 3);
+            //EncryptData(datas, datas[2], 3);
             return datas;
         }
         ///<summary>协议加密解密</summary>

@@ -11,6 +11,8 @@ namespace Test
             byte[] expected = new byte[10];
             data.CopyTo(expected, 3);
             Console.WriteLine(expected.ToString(10));
+            Queue<byte> queue = new Queue<byte>();  
+            queue.Dequeue
         }
     }
 }
