@@ -3,6 +3,7 @@ using Net;
 using Proto;
 using System;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 
@@ -12,7 +13,7 @@ public class SysRoom : Singleton<SysRoom>
     public List<UserData> listUserDatas;
 
     public Action actionOpenRoom;//临时用时间处理，后期可以接入广播系统
-    public Action<string,string,bool> actionChat;
+    public Action<string, string, bool> actionChat;
 
     public override void Init()
     {
@@ -26,6 +27,7 @@ public class SysRoom : Singleton<SysRoom>
         NetClient.Instance.Listen(MsgType.EnResponseOtherJoin, ResponseOtherJoin.Parser, _ResponseOtherJoin);
         NetClient.Instance.Listen(MsgType.EnResponseOtherLeave, ResponseOtherLeave.Parser, _ResponseOtherLeave);
         NetClient.Instance.Listen(MsgType.EnResponseError, ResponseError.Parser, _ResponseError);
+
     }
 
     public void CreateRoomData(RoomData roomData)
@@ -71,9 +73,8 @@ public class SysRoom : Singleton<SysRoom>
     //创建房间
     public void RequestCreateRoom()
     {
-        //RequestCreateRoom request = new RequestCreateRoom();
-        //NetClient.Instance.SendMessage(MsgType.EnRequestCreateRoom, request);
-        NetClient.Instance.TestSendMessage();
+        RequestCreateRoom request = new RequestCreateRoom();
+        NetClient.Instance.SendMessage(MsgType.EnRequestCreateRoom, request);
     }
     private void _ResponseCreateRoom(IMessage message)
     {
@@ -110,13 +111,20 @@ public class SysRoom : Singleton<SysRoom>
         };
         NetClient.Instance.SendMessage(MsgType.EnRequestSend, request);
     }
+
+    public void RequestHeat()
+    {
+        RequestHeard request = new RequestHeard();
+        NetClient.Instance.SendMessage(MsgType.EnRequestHeard, request);
+    }
+
     private void _ResponseSend(IMessage message)
     {
         ResponseSend response = message as ResponseSend;
         if (response == null)
             return;
         //name 可以自己获取
-        actionChat?.Invoke("我自己", response.Msg,true);
+        actionChat?.Invoke("我自己", response.Msg, true);
     }
     public void RequestLeaveRoom()
     {
@@ -138,7 +146,7 @@ public class SysRoom : Singleton<SysRoom>
         ResponseOtherSend response = message as ResponseOtherSend;
         if (response == null) return;
         string name = this.GetNameById(response.UserId);
-        actionChat?.Invoke(name,response.Msg,false);
+        actionChat?.Invoke(name, response.Msg, false);
     }
     private void _ResponseOtherJoin(IMessage message)
     {
@@ -156,10 +164,28 @@ public class SysRoom : Singleton<SysRoom>
     }
     private void _ResponseError(IMessage message)
     {
-        ResponseError response= message as ResponseError;
+        ResponseError response = message as ResponseError;
         if (response == null) return;
         Debug.LogError($"服务器返回错误协议，错误码{response.ErrorCode}:{(int)response.ErrorCode}");
     }
 
+    private void _ResponseHeat(IMessage message)
+    {
+
+    }
     #endregion
+
+
+    public void RequestTest(int index)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            RequestTest request = new RequestTest();
+            request.Num1 = index;
+            request.Num2 = i;
+            request.Str = i.ToString();
+            NetClient.Instance.SendMessage(MsgType.EnRequestTest, request);
+        }
+
+    }
 }

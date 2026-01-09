@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using Proto;
 using Server.Net;
+using System.Threading.Channels;
 
 namespace Server.Logic.SysRoom
 {
@@ -16,6 +17,7 @@ namespace Server.Logic.SysRoom
             NetServer.Instance.Listen(MsgType.EnRequestLeaveRoom, RequestLeaveRoom.Parser, _RequestLeaveRoom);
             NetServer.Instance.Listen(MsgType.EnRequestSend, RequestSend.Parser, _RequestSend);
             NetServer.Instance.Listen(MsgType.EnRequestTest, RequestTest.Parser, _RequestTest);
+            NetServer.Instance.Listen(MsgType.EnRequestHeard, RequestHeard.Parser, _RequestHeard);
         }
 
         private RoomClass CreateRoom(NetSession netSession)
@@ -103,8 +105,24 @@ namespace Server.Logic.SysRoom
         }
         private void _RequestTest(NetSession netSession, IMessage message)
         {
-            
+            //RequestTest request = message as RequestTest;
+            //if (request == null)
+            //    return;
+            //Console.WriteLine(request.ToString());
         }
+
+        //心跳包
+        private void _RequestHeard(NetSession netSession, IMessage message)
+        {
+            RequestHeard request = message as RequestHeard;
+            if (request == null)
+                return;
+            Console.WriteLine(request.ToString());
+            ResponseHeard responseHeard = new ResponseHeard();
+            netSession.SendMessage(MsgType.EnResponseHeard, responseHeard);
+
+        }
+
         private void _RequestSend(NetSession netSession, IMessage message)
         {
             RequestSend request = message as RequestSend;

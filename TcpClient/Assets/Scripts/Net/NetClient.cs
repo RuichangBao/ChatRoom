@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -16,12 +17,13 @@ namespace Net
         private NetPackage netPackage;
         private Dictionary<ushort, NetEventHandle> messageEventHandle = new Dictionary<ushort, NetEventHandle>();
         private Queue<NetMsg> recevieMessage = new Queue<NetMsg>();
+        private Queue<ReqMsg> sendMsgs = new Queue<ReqMsg>();
         private NetworkStream networkStream;
 
         public void StartClient(string ip, int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress iPAddress = IPAddress.Parse(ip);
+            IPAddress iPAddress = IPAddress.Parse("192.168.3.117");
             IPEndPoint iPEndPoint = new IPEndPoint(iPAddress, port);
             socket.BeginConnect(iPEndPoint, ConnectCallBack, socket);
         }
@@ -29,6 +31,10 @@ namespace Net
         private void ConnectCallBack(IAsyncResult ar)
         {
             Debug.Log("异步链接到服务器" + socket.Connected);
+            Socket client = (Socket)ar.AsyncState;
+
+            // 结束异步连接操作（重要！）
+            client.EndConnect(ar);
             if (!socket.Connected)
             {
                 Debug.LogError("链接服务器失败，请重新链接");
@@ -110,32 +116,26 @@ namespace Net
 
         public void SendMessage(MsgType msgType, IMessage message)
         {
-            byte[] datas = NetSerializeUtil.Serialize(msgType, message);
-            SendMessage(datas);
-        }
-        private void SendMessage(byte[] data)
-        {
-            networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
+            ReqMsg reqMsg = new ReqMsg(msgType, message);
+            sendMsgs.Enqueue(reqMsg);
+            _SendMessage();
         }
 
-        public void TestSendMessage()
+        private bool isSending = false;
+        private void _SendMessage()
         {
-            byte[] datas = new byte[1024];
-            for (int i = 0; i < 100; i++)
-            {
-                string str = $"{i}{i}{i}{i}{i}{i}{i}{i}{i}{i}";
-                RequestTest requestTest = new RequestTest
-                {
-                    Str = str
-                };
-                byte[] data = NetSerializeUtil.Serialize(MsgType.EnRequestTest, requestTest);
-                data.CopyTo(datas, 0);
-                networkStream.BeginWrite(datas, 0, data.Length, SendCallBack, networkStream);
-            }
+            if (isSending || sendMsgs.Count <= 0)
+                return;
+            ReqMsg reqMsg = sendMsgs.Dequeue();
+            byte[] data = NetSerializeUtil.Serialize(reqMsg.msgType, reqMsg.message);
+            isSending = true;
+            networkStream.BeginWrite(data, 0, data.Length, SendCallBack, networkStream);
         }
 
         private void SendCallBack(IAsyncResult ar)
         {
+            isSending = false;
+            _SendMessage();
         }
 
         public void Update()

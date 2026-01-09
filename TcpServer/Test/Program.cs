@@ -1,5 +1,9 @@
 ﻿using Server;
-
+using Google.Protobuf;
+using Google.Protobuf.Collections;
+using Proto;
+using System.Threading.Channels;
+using System.Reflection;
 
 namespace Test
 {
@@ -7,12 +11,21 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            byte[] data = { 1, 2, 3, 4 };
-            byte[] expected = new byte[10];
-            data.CopyTo(expected, 3);
-            Console.WriteLine(expected.ToString(10));
-            Queue<byte> queue = new Queue<byte>();  
-            queue.Dequeue
+            RequestTest requestTest = new RequestTest
+            {
+                Num1 = 100,
+                Num2 = 200
+            };
+            Console.WriteLine(RequestTest.Parser);
+            Test(requestTest);
+        }
+
+        static void Test(IMessage message)
+        {
+            Console.WriteLine(message.ToString());
+            Type type = message.GetType();
+            PropertyInfo info = type.GetProperty("Parser");
+            Console.WriteLine(info.DeclaringType.Name);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Server.Net
     public class NetServer : Singleton<NetServer>
     {
         private Dictionary<int, NetSession> listNetSession = new Dictionary<int, NetSession>();
-        private string ip = "127.0.0.1";
         private int port = 1994;
         private Socket socket;
         private int userId = 0;
@@ -19,7 +18,7 @@ namespace Server.Net
         public void StartServer()
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress iPAddress = IPAddress.Parse(ip);
+            IPAddress iPAddress = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint endPoint = new IPEndPoint(iPAddress, port);
             try
             {
@@ -33,7 +32,18 @@ namespace Server.Net
                 Console.WriteLine(ex.ToString());
             }
         }
-
+        private string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            return "127.0.0.1"; // 默认回环地址
+        }
         ///<summary>开始接收客户端链接</summary>
         private void AcceptCallBack(IAsyncResult ar)
         {

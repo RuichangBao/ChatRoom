@@ -1,6 +1,4 @@
 using Net;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 处理协议的MonoBehaviour

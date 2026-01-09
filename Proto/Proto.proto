@@ -15,6 +15,14 @@ message ResponsesTest{
   int32 num1 = 2; // 页码
   int32 num2 = 3; // 每页结果数
 }
+
+message RequestHeard { //心跳
+
+}
+message ResponseHeard {
+
+}
+
 //客户端请求连接
 message RequestLink{
 

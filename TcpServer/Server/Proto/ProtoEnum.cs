@@ -24,17 +24,18 @@ namespace Proto {
     static ProtoEnumReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg9Qcm90b0VudW0ucHJvdG8SBVByb3RvKvcCCgdNc2dUeXBlEhEKDWVuUmVx",
-            "dWVzdFRlc3QQABITCg9lblJlc3BvbnNlc1Rlc3QQARIRCg1lblJlcXVlc3RM",
-            "aW5rEGQSEgoOZW5SZXNwb25zZUxpbmsQZRIXChNlblJlcXVlc3RDcmVhdGVS",
-            "b29tEGYSGAoUZW5SZXNwb25zZUNyZWF0ZVJvb20QZxIVChFlblJlcXVlc3RK",
-            "b2luUm9vbRBoEhYKEmVuUmVzcG9uc2VKb2luUm9vbRBpEhcKE2VuUmVzcG9u",
-            "c2VPdGhlckpvaW4QahIWChJlblJlcXVlc3RMZWF2ZVJvb20QaxIXChNlblJl",
-            "c3BvbnNlTGVhdmVSb29tEGwSGAoUZW5SZXNwb25zZU90aGVyTGVhdmUQbRIS",
-            "Cg1lblJlcXVlc3RTZW5kEMgBEhMKDmVuUmVzcG9uc2VTZW5kEMkBEhgKE2Vu",
-            "UmVzcG9uc2VPdGhlclNlbmQQygESFAoPZW5SZXNwb25zZUVycm9yELgXKjoK",
-            "CUVycm9yQ29kZRILCgdFcnJUZXN0EAASDwoLRXJyUm9vbU5vbmUQZBIPCgtF",
-            "cnJOb0luUm9vbRBlYgZwcm90bzM="));
+            "Cg9Qcm90b0VudW0ucHJvdG8SBVByb3RvKqADCgdNc2dUeXBlEhEKDWVuUmVx",
+            "dWVzdFRlc3QQABITCg9lblJlc3BvbnNlc1Rlc3QQARISCg5lblJlcXVlc3RI",
+            "ZWFyZBBiEhMKD2VuUmVzcG9uc2VIZWFyZBBjEhEKDWVuUmVxdWVzdExpbmsQ",
+            "ZBISCg5lblJlc3BvbnNlTGluaxBlEhcKE2VuUmVxdWVzdENyZWF0ZVJvb20Q",
+            "ZhIYChRlblJlc3BvbnNlQ3JlYXRlUm9vbRBnEhUKEWVuUmVxdWVzdEpvaW5S",
+            "b29tEGgSFgoSZW5SZXNwb25zZUpvaW5Sb29tEGkSFwoTZW5SZXNwb25zZU90",
+            "aGVySm9pbhBqEhYKEmVuUmVxdWVzdExlYXZlUm9vbRBrEhcKE2VuUmVzcG9u",
+            "c2VMZWF2ZVJvb20QbBIYChRlblJlc3BvbnNlT3RoZXJMZWF2ZRBtEhIKDWVu",
+            "UmVxdWVzdFNlbmQQyAESEwoOZW5SZXNwb25zZVNlbmQQyQESGAoTZW5SZXNw",
+            "b25zZU90aGVyU2VuZBDKARIUCg9lblJlc3BvbnNlRXJyb3IQuBcqOgoJRXJy",
+            "b3JDb2RlEgsKB0VyclRlc3QQABIPCgtFcnJSb29tTm9uZRBkEg8KC0Vyck5v",
+            "SW5Sb29tEGViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgType), typeof(global::Proto.ErrorCode), }, null, null));
@@ -43,9 +44,17 @@ namespace Proto {
 
   }
   #region Enums
+  /// <summary>
+  ///在C#中用ushort接收MsgType,所以 协议号不能大于ushort.MaxValue(65535)
+  /// </summary>
   public enum MsgType {
     [pbr::OriginalName("enRequestTest")] EnRequestTest = 0,
     [pbr::OriginalName("enResponsesTest")] EnResponsesTest = 1,
+    /// <summary>
+    ///心跳包
+    /// </summary>
+    [pbr::OriginalName("enRequestHeard")] EnRequestHeard = 98,
+    [pbr::OriginalName("enResponseHeard")] EnResponseHeard = 99,
     /// <summary>
     ///客户端请求连接
     /// </summary>

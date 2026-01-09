@@ -1,6 +1,8 @@
 using Google.Protobuf;
 using Net;
 using Proto;
+using System.Net.Sockets;
+using System.Net;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +12,6 @@ namespace UILogic
     {
         //可以做成配置文件
         private int port = 1994;
-        private string ip = "127.0.0.1";
         public Button btnGameStart;
 
         void Start()
@@ -19,9 +20,10 @@ namespace UILogic
             btnGameStart.onClick.AddListener(BtnGameStart);
         }
 
+
         public void BtnGameStart()
         {
-            NetClient.Instance.StartClient(ip, port);
+            NetClient.Instance.StartClient(port);
         }
 
         private void _ResponseLinkSucces(IMessage message)

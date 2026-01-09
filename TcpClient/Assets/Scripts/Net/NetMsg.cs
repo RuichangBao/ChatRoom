@@ -1,5 +1,7 @@
 ﻿using Google.Protobuf;
+using Proto;
 using System;
+using System.Threading;
 
 namespace Net
 {
@@ -11,6 +13,16 @@ namespace Net
         {
             this.message = message;
             this.callBack = callBack;
+        }
+    }
+    public struct ReqMsg
+    {
+        public MsgType msgType;
+        public IMessage message;
+        public ReqMsg(MsgType msgType, IMessage message)
+        {
+            this.msgType = msgType;
+            this.message = message;
         }
     }
 }
