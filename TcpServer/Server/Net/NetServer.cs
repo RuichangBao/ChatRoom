@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf;
 using Proto;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 
@@ -34,7 +35,7 @@ namespace Server.Net
         }
         private string GetLocalIPAddress()
         {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)

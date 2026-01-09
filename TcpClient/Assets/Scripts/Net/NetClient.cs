@@ -20,10 +20,10 @@ namespace Net
         private Queue<ReqMsg> sendMsgs = new Queue<ReqMsg>();
         private NetworkStream networkStream;
 
-        public void StartClient(string ip, int port)
+        public void StartClient(int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress iPAddress = IPAddress.Parse("192.168.3.117");
+            IPAddress iPAddress = IPAddress.Parse("180.165.2.6");
             IPEndPoint iPEndPoint = new IPEndPoint(iPAddress, port);
             socket.BeginConnect(iPEndPoint, ConnectCallBack, socket);
         }
@@ -31,10 +31,10 @@ namespace Net
         private void ConnectCallBack(IAsyncResult ar)
         {
             Debug.Log("异步链接到服务器" + socket.Connected);
-            Socket client = (Socket)ar.AsyncState;
+            //Socket client = (Socket)ar.AsyncState;
 
-            // 结束异步连接操作（重要！）
-            client.EndConnect(ar);
+            //// 结束异步连接操作（重要！）
+            //client.EndConnect(ar);
             if (!socket.Connected)
             {
                 Debug.LogError("链接服务器失败，请重新链接");
